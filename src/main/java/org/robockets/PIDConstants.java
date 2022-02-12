@@ -9,10 +9,16 @@ public class PIDConstants {
 
     public static final double r_wheel_meters = 0.05;
     public static final double width_meters = 0.6;
+    public static final double gear_ratio = 1.0;
 
     public static double METERS_TO_REVS(double meters) {
         double circumference = Math.PI * 2.0 * r_wheel_meters;
         return meters * (TICKS_PER_REV / circumference);
+    }
+
+    public static double METERS_TO_ROTATIONS(double meters) {
+        double circumference = Math.PI * 2.0 * r_wheel_meters;
+        return (meters / circumference)*gear_ratio;
     }
 
     // These are numbers that were obtained using the robot characterization toolsuite
