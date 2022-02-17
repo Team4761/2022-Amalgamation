@@ -11,14 +11,6 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import static org.robockets.PIDConstants.kTrackwidthMeters;
 
 public class RobotMap {
-
-    public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
-
-    //RAMSETE Follower variables
-    // TODO: What is this?
-    public static final double kRamseteB = 2.0;
-    public static final double kRamseteZeta = 0.7;
-
     //I have to look into something called "Drive Constants"
 
     // Drivetrain motors. The Talons already have encoders inside them
@@ -43,6 +35,7 @@ public class RobotMap {
     public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
     //Tracking Shenanigans
+    public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
     public static DifferentialDriveOdometry m_odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
 
 }

@@ -8,7 +8,7 @@ package org.robockets;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import org.robockets.Drivetrain.DrivetrainSubsystem;
 
 
 /**
@@ -19,11 +19,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot
 {
-    private static final String DEFAULT_AUTO = "Default";
-    private static final String CUSTOM_AUTO = "My Auto";
     private String autoSelected;
     private final SendableChooser<String> chooser = new SendableChooser<>();
-    
+
+    // Subsystems
+    public static final DrivetrainSubsystem m_drivetrain = DrivetrainSubsystem.getInstance();
     
     /**
      * This method is run when the robot is first started up and should be used for any
@@ -32,8 +32,9 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit()
     {
-        chooser.setDefaultOption("Default Auto", DEFAULT_AUTO);
-        chooser.addOption("My Auto", CUSTOM_AUTO);
+        // adds all the auto options to it
+        // Yes I COULD have all this in the same class, but it's nicer when it's separated
+        AutonomousOptions.addOptions(chooser);
         SmartDashboard.putData("Auto choices", chooser);
     }
     
@@ -74,10 +75,18 @@ public class Robot extends TimedRobot
     {
         switch (autoSelected)
         {
-            case CUSTOM_AUTO:
+            case AutonomousOptions.DEBUG_AUTO:
                 // Put custom auto code here
                 break;
-            case DEFAULT_AUTO:
+            case AutonomousOptions.DEFAULT_AUTO:
+                // code goes here
+                break;
+            case AutonomousOptions.FIND_BALL_ON_GROUND:
+                // raspberry pi code goes here
+                break;
+            case AutonomousOptions.SHOOT_BALL:
+                // code goes here
+                break;
             default:
                 // Put default auto code here
                 break;
