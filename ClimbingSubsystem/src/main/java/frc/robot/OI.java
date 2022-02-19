@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class OI {
-    //cap extension and retraction
-    //NOTE: move some of OI into RobotMap
+    //cap extension and retraction?
+    //NOTE: move/merge some of OI into RobotMap
     //Untested values/ports
     //Controller Object
     public static Joystick controller = new Joystick(0);
@@ -24,13 +24,14 @@ public class OI {
 
     //Motors - 2 motors (2 arms) RobotMap
     //change motor eventually. And ports, etc. CANSparkMax. Parameters
-    public static CANSparkMax leftArmExtendMotor = new CANSparkMax(0, CANSparkMaxLowLevel.MotorType.kBrushless);
-    public static CANSparkMax rightArmExtendMotor = new CANSparkMax(1, CANSparkMaxLowLevel.MotorType.kBrushless);
+    public static CANSparkMax leftArmExtendMotor = new CANSparkMax(0, CANSparkMaxLowLevel.MotorType.kBrushed);
+    public static CANSparkMax rightArmExtendMotor = new CANSparkMax(1, CANSparkMaxLowLevel.MotorType.kBrushed);
 
-    //Pneumatics - 2 pneumatics (2 arms)
+    //Pneumatics - 2 double solenoids (2 arms)
     //push out to tilt, pull back to straight
-    public static DoubleSolenoid rightClimberSolenoids = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1);
-    public static DoubleSolenoid leftClimberSolenoids = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 3);
+    //left and right solenoids both in one DIO - controlled as one
+    public static DoubleSolenoid ClimberSolenoids = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1);
+    //public static DoubleSolenoid leftClimberSolenoids = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 3);
     //parameters - UPDATE THE CHANNEL LOCATIONS/MODULE TYPE ONCE DECIDED BY MECHANICAL/ELECTRICAL
     //ModuleType - based on type of pneumatics
     //channels in Digital IO which control up and down of pneumatic

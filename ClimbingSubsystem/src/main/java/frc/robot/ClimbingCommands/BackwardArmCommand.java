@@ -21,8 +21,8 @@ public class BackwardArmCommand extends CommandBase {
     @Override
     public void execute() {
         //pull backwards to straight up position/close Solenoids
-        OI.leftClimberSolenoids.set(DoubleSolenoid.Value.kReverse);
-        OI.rightClimberSolenoids.set(DoubleSolenoid.Value.kReverse);
+        OI.ClimberSolenoids.set(DoubleSolenoid.Value.kReverse);
+        //OI.rightClimberSolenoids.set(DoubleSolenoid.Value.kReverse);
     }
 
     @Override

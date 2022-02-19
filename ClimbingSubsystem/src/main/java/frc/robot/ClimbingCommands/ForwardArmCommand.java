@@ -21,8 +21,8 @@ public class ForwardArmCommand extends CommandBase {
     @Override
     public void execute() {
         //tilt forward
-        OI.rightClimberSolenoids.set(DoubleSolenoid.Value.kForward);
-        OI.leftClimberSolenoids.set(DoubleSolenoid.Value.kForward);
+        OI.ClimberSolenoids.set(DoubleSolenoid.Value.kForward);
+        //OI.leftClimberSolenoids.set(DoubleSolenoid.Value.kForward);
     }
 
     @Override
