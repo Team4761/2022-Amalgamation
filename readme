@@ -1,0 +1,3 @@
+So uh this code is kinda messy....
+The mathstuff class,  and the find target, adjust to target, and adjust to distance commands are the important ones.
+There is stuff in Robot that needs to be brought over and the motors currently are spark maxes not falcons. (No time and drivetrain wasn't done at time of coding)
