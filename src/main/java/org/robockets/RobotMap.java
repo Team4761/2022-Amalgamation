@@ -5,8 +5,11 @@ import com.ctre.phoenix.sensors.CANCoder;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 
 import static org.robockets.PIDConstants.kTrackwidthMeters;
 
@@ -38,4 +41,10 @@ public class RobotMap {
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
     public static DifferentialDriveOdometry m_odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
 
+    // Intake
+    public static Spark back_intake = new Spark(1);
+    public static Spark front_intake = new Spark(2);
+    // Is this DIO ports?
+    public static Solenoid back_pull = new Solenoid(PneumaticsModuleType.CTREPCM,0);
+    public static Solenoid front_pull = new Solenoid(PneumaticsModuleType.CTREPCM,1);
 }

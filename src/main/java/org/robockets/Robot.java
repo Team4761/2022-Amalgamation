@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.robockets.Drivetrain.DrivetrainSubsystem;
+import org.robockets.Intake.IntakeSubsystem;
 
 
 /**
@@ -24,7 +25,8 @@ public class Robot extends TimedRobot
 
     // Subsystems
     public static final DrivetrainSubsystem m_drivetrain = DrivetrainSubsystem.getInstance();
-    
+    public static final IntakeSubsystem m_intake = IntakeSubsystem.getInstance();
+
     /**
      * This method is run when the robot is first started up and should be used for any
      * initialization code.
@@ -102,11 +104,6 @@ public class Robot extends TimedRobot
     /** This method is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
-        //TODO: Check the axis values
-        double rot = OI.xbox.getRawAxis(1);
-        double trans = OI.xbox.getRawAxis(2);
-
-        RobotMap.m_drive.arcadeDrive(trans,rot);
 
     }
     
