@@ -15,7 +15,7 @@ public class AutonomousOptions {
     public static final String FIND_BALL_ON_GROUND = "Goto Ball";
 
     public static final String DEFAULT_AUTO_PATH = TRAJECTORY_DIR + "\\easy path.wpilib.json";
-    public static final String DEBUG_AUTO_PATH = "";
+    public static final String DEBUG_AUTO_PATH = "\\debug path.wpilib.json";
     public static final String FIVE_BALL_PATH = TRAJECTORY_DIR + "\\Main Path.wpilib.json";
     public static final String SHOOT_BALL_PATH = "";
     public static final String FIND_BALL_ON_GROUND_PATH = "";
