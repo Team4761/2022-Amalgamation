@@ -81,7 +81,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     public DifferentialDriveWheelSpeeds getWheelSpeeds() {
         //TODO: Check that these speeds are in the right unit!
-        return new DifferentialDriveWheelSpeeds(RobotMap.c_front_left.getVelocity(),RobotMap.c_front_right.getVelocity());
+        return new DifferentialDriveWheelSpeeds(
+                RobotMap.c_front_left.getVelocity() * GearRatios.drivetrain,
+                RobotMap.c_front_right.getVelocity() * GearRatios.drivetrain
+        );
+        //return new DifferentialDriveWheelSpeeds(RobotMap.c_front_left.getVelocity(),RobotMap.c_front_right.getVelocity());
     }
 
     public void tankDriveVolts(double l, double r) {
