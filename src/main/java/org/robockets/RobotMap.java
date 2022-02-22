@@ -68,4 +68,13 @@ public class RobotMap {
     //parameters - UPDATE THE CHANNEL LOCATIONS/MODULE TYPE ONCE DECIDED BY MECHANICAL/ELECTRICAL
     //ModuleType - based on type of pneumatics
     //channels in Digital IO which control up and down of pneumatic
+
+    /**
+     * Eddies Code that HE finally Uploaded!!
+     */
+
+    public static CANSparkMax c_ShooterLeft = new CANSparkMax(7, CANSparkMaxLowLevel.MotorType.kBrushless);
+    public static CANSparkMax c_ShooterRight = new CANSparkMax(8, CANSparkMaxLowLevel.MotorType.kBrushless);
+
+    public static MotorControllerGroup robotShoot = new MotorControllerGroup(c_ShooterLeft, c_ShooterRight);
 }
