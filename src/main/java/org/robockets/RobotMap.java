@@ -2,6 +2,8 @@ package org.robockets;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -42,8 +44,8 @@ public class RobotMap {
     public static DifferentialDriveOdometry m_odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
 
     // Intake
-    public static Spark back_intake = new Spark(1);
-    public static Spark front_intake = new Spark(2);
+    public static CANSparkMax back_intake = new CANSparkMax(1, CANSparkMaxLowLevel.MotorType.kBrushed);
+    public static CANSparkMax front_intake = new CANSparkMax(2, CANSparkMaxLowLevel.MotorType.kBrushed)
     // Is this DIO ports?
     public static Solenoid back_pull = new Solenoid(PneumaticsModuleType.CTREPCM,0);
     public static Solenoid front_pull = new Solenoid(PneumaticsModuleType.CTREPCM,1);

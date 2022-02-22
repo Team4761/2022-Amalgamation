@@ -38,8 +38,7 @@ public class PIDConstants {
     public static final double kMaxSpeedMetersPerSecond = 3.0;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3.0;
 
-    //RAMSETE Follower variables
-    // TODO: What is this?
+    //RAMSETE Follower variables Keep these numbers! They work good!
     public static final double kRamseteB = 2.0;
     public static final double kRamseteZeta = 0.7;
 

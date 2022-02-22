@@ -5,11 +5,16 @@
 
 package org.robockets;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.robockets.Drivetrain.DrivetrainSubsystem;
+import org.robockets.Drivetrain.pathWeaverInterpreter;
 import org.robockets.Intake.IntakeSubsystem;
+
+import java.io.IOException;
 
 
 /**
@@ -22,6 +27,9 @@ public class Robot extends TimedRobot
 {
     private String autoSelected;
     private final SendableChooser<String> chooser = new SendableChooser<>();
+
+    // Command Scheduler
+    private CommandScheduler commandScheduler = CommandScheduler.getInstance();
 
     // Subsystems
     public static final DrivetrainSubsystem m_drivetrain = DrivetrainSubsystem.getInstance();
@@ -78,7 +86,13 @@ public class Robot extends TimedRobot
         switch (autoSelected)
         {
             case AutonomousOptions.DEBUG_AUTO:
-                // Put custom auto code here
+                try {
+                    pathWeaverInterpreter.loadTrajectory(AutonomousOptions.DEBUG_AUTO_PATH);
+                } catch (IOException e) {
+                    DriverStation.reportError("Unable to Load the debug trajectory",true);
+                    e.printStackTrace();
+                }
+                pathWeaverInterpreter.autoPathWeaverCommand();
                 break;
             case AutonomousOptions.DEFAULT_AUTO:
                 // code goes here
@@ -87,7 +101,7 @@ public class Robot extends TimedRobot
                 // raspberry pi code goes here
                 break;
             case AutonomousOptions.SHOOT_BALL:
-                // code goes here
+                // shooter code goes here
                 break;
             default:
                 // Put default auto code here
@@ -104,7 +118,8 @@ public class Robot extends TimedRobot
     /** This method is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
-
+        // When it works :(
+        commandScheduler.run();
     }
     
     
