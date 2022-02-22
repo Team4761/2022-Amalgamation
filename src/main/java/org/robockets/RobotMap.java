@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -44,9 +45,27 @@ public class RobotMap {
     public static DifferentialDriveOdometry m_odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
 
     // Intake
-    public static CANSparkMax back_intake = new CANSparkMax(1, CANSparkMaxLowLevel.MotorType.kBrushed);
-    public static CANSparkMax front_intake = new CANSparkMax(2, CANSparkMaxLowLevel.MotorType.kBrushed);
+    public static CANSparkMax back_intake = new CANSparkMax(3, CANSparkMaxLowLevel.MotorType.kBrushed);
+    public static CANSparkMax front_intake = new CANSparkMax(4, CANSparkMaxLowLevel.MotorType.kBrushed);
     // Is this DIO ports?
     public static Solenoid back_pull = new Solenoid(PneumaticsModuleType.CTREPCM,0);
     public static Solenoid front_pull = new Solenoid(PneumaticsModuleType.CTREPCM,1);
+
+    /**
+     * YO!!! Braden Code!
+     */
+
+    //Motors - 2 motors (2 arms) RobotMap
+    //change motor eventually. And ports, etc. CANSparkMax. Parameters
+    public static CANSparkMax leftArmExtendMotor = new CANSparkMax(5, CANSparkMaxLowLevel.MotorType.kBrushed);
+    public static CANSparkMax rightArmExtendMotor = new CANSparkMax(6, CANSparkMaxLowLevel.MotorType.kBrushed);
+
+    //Pneumatics - 2 double solenoids (2 arms)
+    //push out to tilt, pull back to straight
+    //left and right solenoids both in one DIO - controlled as one
+    public static DoubleSolenoid ClimberSolenoids = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1);
+    //public static DoubleSolenoid leftClimberSolenoids = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 3);
+    //parameters - UPDATE THE CHANNEL LOCATIONS/MODULE TYPE ONCE DECIDED BY MECHANICAL/ELECTRICAL
+    //ModuleType - based on type of pneumatics
+    //channels in Digital IO which control up and down of pneumatic
 }
