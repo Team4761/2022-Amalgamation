@@ -18,9 +18,11 @@ public class ShooterShootCommand extends CommandBase {
 
     @Override
     public void execute() {
+        //If all shoots arent making mess with this variable accordingly
         double frictionMakeup = 1.0;
         //Aim Assist Hacks
-        double y;
+        double y = 2.44;
+        //Owen put distance from limelight
         double x;
         
         double theta = 45;
@@ -30,9 +32,6 @@ public class ShooterShootCommand extends CommandBase {
         
         double velocity = Math.sqrt((4.905*x*x)/(cos*cos*(y-(x*Math.tan(rtheta))));
         double rpm = (30*velocity)/((22/7)*(radius/39.37));
-        if(OI.y = true){
-            RobotMap.robotShoot.Shoot(rpm * frictionMakeup);
-        }
         
         //regular
         double radius = 2;
@@ -43,11 +42,14 @@ public class ShooterShootCommand extends CommandBase {
 
         double Hrpm = (30*Hspeedms)/((22/7)*(radius/39.37));
         double Lrpm = (30*Lspeedms)/((22/7)*(radius/39.37));
-
-        if(OI.a = true){
+        
+        //rename Button1, Button2, Button3 to whatever the buttons wanted for shooting are named in OI.java
+        if(OI.Button1 = true){
             RobotMap.robotShoot.Shoot(Lspeed * frictionMakeup);
-        } else if (OI.b = true){
+        } else if (OI.Button2 = true){
             RobotMap.robotShoot.Shoot(Hspeed * frictionMakeup);
+        } else if(OI.Button2 = true){
+            RobotMap.robotShoot.Shoot(rpm * frictionMakeup);
         } else {
             RobotMap.robotShoot.Shoot(0);
         }
