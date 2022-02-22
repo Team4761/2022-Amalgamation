@@ -45,7 +45,7 @@ public class RobotMap {
 
     // Intake
     public static CANSparkMax back_intake = new CANSparkMax(1, CANSparkMaxLowLevel.MotorType.kBrushed);
-    public static CANSparkMax front_intake = new CANSparkMax(2, CANSparkMaxLowLevel.MotorType.kBrushed)
+    public static CANSparkMax front_intake = new CANSparkMax(2, CANSparkMaxLowLevel.MotorType.kBrushed);
     // Is this DIO ports?
     public static Solenoid back_pull = new Solenoid(PneumaticsModuleType.CTREPCM,0);
     public static Solenoid front_pull = new Solenoid(PneumaticsModuleType.CTREPCM,1);
