@@ -73,8 +73,8 @@ public class RobotMap {
      * Eddies Code that HE finally Uploaded!!
      */
 
-    public static CANSparkMax c_ShooterLeft = new CANSparkMax(7, CANSparkMaxLowLevel.MotorType.kBrushless);
-    public static CANSparkMax c_ShooterRight = new CANSparkMax(8, CANSparkMaxLowLevel.MotorType.kBrushless);
+    public static WPI_TalonFX c_ShooterLeft = new WPI_TalonFX(7);
+    public static WPI_TalonFX c_ShooterRight = new WPI_TalonFX(8);
 
     public static MotorControllerGroup robotShoot = new MotorControllerGroup(c_ShooterLeft, c_ShooterRight);
 }
