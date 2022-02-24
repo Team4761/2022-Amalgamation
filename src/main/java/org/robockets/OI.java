@@ -12,6 +12,7 @@ public class OI {
     //Side with switch and green button is left side
     //Ordered starting at top out going down then next inward column
     //<Comments are for confused people, remove if wanted>
+    //Rename buttons as needed may want to rename switch and only green button
     
     public static Joystick LeftButtonBoard = new Joystick(0);//0 = port
     
