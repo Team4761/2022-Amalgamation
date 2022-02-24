@@ -13,7 +13,7 @@ public class OI {
     //Ordered starting at top out going down then next inward column
     //<Comments are for confused people, remove if wanted>
     
-    public static Joystick LeftButtonBoard = new Joystick(0);
+    public static Joystick LeftButtonBoard = new Joystick(0);//0 = port
     
     public static final JoystickButton lbb1 = new JoystickButton(LeftButtonBoard,6);//top red
     public static final JoystickButton lbb2 = new JoystickButton(LeftButtonBoard,2);//top black
@@ -26,7 +26,7 @@ public class OI {
     public static final JoystickButton lbb9 = new JoystickButton(LeftButtonBoard,10);//green button
     //top middle black button(doesn't work)
     
-    public static Joystick RightButtonBoard = new Joystick(1);
+    public static Joystick RightButtonBoard = new Joystick(1);//1 = port
     
     //top 3 right most buttons (don't work)
     public static final JoystickButton rbb4 = new JoystickButton(RightButtonBoard,7);//bottom right red
