@@ -8,8 +8,36 @@ public class OI {
     public static Joystick xbox = new Joystick(0);
     public static Joystick xbox2 = new Joystick(1);
 
-    //Button Board goes here
-
+    //<Button Board goes here>
+    //Side with switch and green button is left side
+    //Ordered starting at top out going down then next inward column
+    //<Comments are for confused people, remove if wanted>
+    
+    public static Joystick LeftButtonBoard = new Joystick(0);
+    
+    public static final JoystickButton lbb1 = new JoystickButton(LeftButtonBoard,6);//top red
+    public static final JoystickButton lbb2 = new JoystickButton(LeftButtonBoard,2);//top black
+    //left most white (doesn't work)
+    public static final JoystickButton lbb4 = new JoystickButton(LeftButtonBoard,11);//bottom left red
+    public static final JoystickButton lbb5 = new JoystickButton(LeftButtonBoard,12);//bottom left black
+    public static final JoystickButton lbb6 = new JoystickButton(LeftButtonBoard,8);//top left white
+    //black button above switch(doesn't work)
+    public static final JoystickButton lbb8 = new JoystickButton(LeftButtonBoard,4);//switch
+    public static final JoystickButton lbb9 = new JoystickButton(LeftButtonBoard,10);//green button
+    //top middle black button(doesn't work)
+    
+    public static Joystick RightButtonBoard = new Joystick(1);
+    
+    //top 3 right most buttons (don't work)
+    public static final JoystickButton rbb4 = new JoystickButton(RightButtonBoard,7);//bottom right red
+    //Bottom right black (doesn't work)
+    public static final JoystickButton rbb6 = new JoystickButton(RightButtonBoard,5);//top most right white
+    //Black directly under top & left most white (doesn't work)
+    public static final JoystickButton rbb8 = new JoystickButton(RightButtonBoard,3);//center most right
+    public static final JoystickButton rbb9 = new JoystickButton(RightButtonBoard,8);//bottom center black
+    public static final JoystickButton rbb10 = new JoystickButton(RightButtonBoard,2);//right middle black
+    
+    
     //The Manual Arduino
     public static final Joystick manual = new Joystick(1);
     public static final JoystickButton mb1 = new JoystickButton(manual,1);
