@@ -1,6 +1,7 @@
 package org.robockets.ClimbingCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import org.robockets.OI;
 import org.robockets.RobotMap;
 
 
@@ -21,8 +22,10 @@ public class RetractArmCommand extends CommandBase {
     @Override
     public void execute() {
         //Motors in reverse direction. Motors connected to winch (andymark climber in a box)
-        RobotMap.rightArmExtendMotor.set(-0.6);  //test values
-        RobotMap.leftArmExtendMotor.set(-0.6);
+   //     RobotMap.rightArmExtendMotor.set(-0.6);  //test values
+   //     RobotMap.leftArmExtendMotor.set(-0.6);
+        RobotMap.rightArmExtendMotor.set(-OI.xbox.getRawAxis(2));
+        RobotMap.leftArmExtendMotor.set(-OI.xbox.getRawAxis(2));
     }
 
     @Override

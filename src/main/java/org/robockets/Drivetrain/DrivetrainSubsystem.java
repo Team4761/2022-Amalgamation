@@ -57,11 +57,15 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         // There's a built in ramp feature so it will ALL work out
         //TODO: Check the axis values
-        double rot = OI.xbox2.getRawAxis(1);
+        double rot = OI.xbox.getRawAxis(4);
         double trans = OI.xbox.getRawAxis(1);
 
-        if(isDrive){
-            RobotMap.m_drive.tankDrive(-trans,rot);
+        if(true){
+            RobotMap.m_drive.arcadeDrive(trans,rot);
+         //   RobotMap.rightArmExtendMotor.set(OI.xbox.getRawAxis(0));
+            RobotMap.leftArmExtendMotor.set(OI.xbox.getRawAxis(0));
+            RobotMap.rightArmExtendMotor.set(-OI.xbox.getRawAxis(0));
+          //  RobotMap.leftArmExtendMotor.set(OI.xbox.getRawAxis(0));
         }
     }
 

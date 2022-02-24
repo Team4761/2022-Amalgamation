@@ -1,6 +1,7 @@
 package org.robockets.ClimbingCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import org.robockets.OI;
 import org.robockets.RobotMap;
 
 
@@ -20,8 +21,11 @@ public class ExtendArmCommand extends CommandBase {
 
     @Override
     public void execute() {
-        RobotMap.leftArmExtendMotor.set(0.6); //test speed
-        RobotMap.rightArmExtendMotor.set(0.6);
+       // RobotMap.leftArmExtendMotor.set(0.6); //test speed
+       // RobotMap.rightArmExtendMotor.set(0.6);
+        RobotMap.rightArmExtendMotor.set(OI.xbox.getRawAxis(2));
+        RobotMap.leftArmExtendMotor.set(OI.xbox.getRawAxis(2));
+        System.out.println("Testing Working");
     }
 
     @Override

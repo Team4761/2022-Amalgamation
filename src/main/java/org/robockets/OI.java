@@ -2,11 +2,19 @@ package org.robockets;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import org.robockets.ClimbingCommands.ExtendArmCommand;
+import org.robockets.ClimbingCommands.RetractArmCommand;
 
 public class OI {
 
     public static Joystick xbox = new Joystick(0);
     public static Joystick xbox2 = new Joystick(1);
+
+    public static JoystickButton a = new JoystickButton(xbox, 0);
+    public static JoystickButton b = new JoystickButton(xbox, 1);
+    public static JoystickButton x = new JoystickButton(xbox, 2);
+    public static JoystickButton y = new JoystickButton(xbox, 3);
+
 
     //Button Board goes here
 
@@ -80,4 +88,8 @@ public class OI {
     public static final JoystickButton ab31 = new JoystickButton(auto,31);
     public static final JoystickButton ab32 = new JoystickButton(auto,32);
 
+    public OI(){
+        a.whenPressed(new ExtendArmCommand());
+        b.whenPressed(new RetractArmCommand());
+    }
 }
