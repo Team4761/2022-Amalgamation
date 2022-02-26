@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class OI {
 
-    public static Joystick xbox = new Joystick(0);
-    public static Joystick xbox2 = new Joystick(1);
+    public static Joystick left_flight_stick = new Joystick(0);
+    public static Joystick right_flight_stick = new Joystick(1);
 
     //<Button Board goes here>
     //Side with switch and green button is left side

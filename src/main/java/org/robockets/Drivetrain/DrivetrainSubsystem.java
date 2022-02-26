@@ -12,7 +12,7 @@ import org.robockets.RobotMap;
 
 public class DrivetrainSubsystem extends SubsystemBase {
 
-    public static boolean isDrive;
+    public static boolean isDrive = true;
 
     // With eager singleton initialization, any static variables/fields used in the 
     // constructor must appear before the "INSTANCE" variable so that they are initialized 
@@ -57,11 +57,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         // There's a built in ramp feature so it will ALL work out
         //TODO: Check the axis values
-        double rot = OI.xbox2.getRawAxis(1);
-        double trans = OI.xbox.getRawAxis(1);
+        double trans_right = OI.right_flight_stick.getRawAxis(1);
+        double trans_left = OI.left_flight_stick.getRawAxis(1);
 
         if(isDrive){
-            RobotMap.m_drive.tankDrive(-trans,rot);
+            RobotMap.m_drive.tankDrive(-trans_left,trans_right);
         }
     }
 
