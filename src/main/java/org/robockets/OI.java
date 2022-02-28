@@ -12,15 +12,20 @@ public class OI {
     public static JoystickButton x = new JoystickButton(xbox, 2);
     public static JoystickButton y = new JoystickButton(xbox, 3);
 	
-	public static double left_trigger = xbox.getRawAxis(6);
-	public static double right_trigger = xbox.getRawAxis(7);
+    public static double left_trigger = xbox.getRawAxis(6);
+    public static double right_trigger = xbox.getRawAxis(7);
 
     //<Button Board goes here>
     //Side with switch and green button is left side
     //Ordered starting at top out going down then next inward column
     //<Comments are for confused people, remove if wanted>
     //Rename buttons as needed may want to rename switch and only green button
-    
+	
+	/**
+	*	I need SOMEONE TO fix this! Use the two arduinos that I already built!
+	*/
+	
+    /*
     public static Joystick LeftButtonBoard = new Joystick(0);//0 = port
     
     public static final JoystickButton lbb1 = new JoystickButton(LeftButtonBoard,6);//top red
@@ -44,7 +49,7 @@ public class OI {
     public static final JoystickButton rbb8 = new JoystickButton(RightButtonBoard,3);//center most right
     public static final JoystickButton rbb9 = new JoystickButton(RightButtonBoard,8);//bottom center black
     public static final JoystickButton rbb10 = new JoystickButton(RightButtonBoard,2);//right middle black
-    
+    */
     
     //The Manual Arduino
     public static final Joystick manual = new Joystick(1);
