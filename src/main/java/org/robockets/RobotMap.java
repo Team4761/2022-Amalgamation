@@ -45,11 +45,11 @@ public class RobotMap {
     public static DifferentialDriveOdometry m_odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
 
     // Intake
-    public static CANSparkMax back_intake = new CANSparkMax(3, CANSparkMaxLowLevel.MotorType.kBrushed);
-    public static CANSparkMax front_intake = new CANSparkMax(4, CANSparkMaxLowLevel.MotorType.kBrushed);
+    public static CANSparkMax back_intake = new CANSparkMax(9, CANSparkMaxLowLevel.MotorType.kBrushed);
+    public static CANSparkMax front_intake = new CANSparkMax(10, CANSparkMaxLowLevel.MotorType.kBrushed);
     // Is this DIO ports?
-   // public static Solenoid back_pull = new Solenoid(PneumaticsModuleType.CTREPCM,0);
-    // public static Solenoid front_pull = new Solenoid(PneumaticsModuleType.CTREPCM,1);
+    public static Solenoid back_pull = new Solenoid(PneumaticsModuleType.CTREPCM,0);
+    public static Solenoid front_pull = new Solenoid(PneumaticsModuleType.CTREPCM,1);
 
     /**
      * YO!!! Braden Code!
@@ -57,8 +57,8 @@ public class RobotMap {
 
     //Motors - 2 motors (2 arms) RobotMap
     //change motor eventually. And ports, etc. CANSparkMax. Parameters
-    public static CANSparkMax leftArmExtendMotor = new CANSparkMax(5, CANSparkMaxLowLevel.MotorType.kBrushless);
-    public static CANSparkMax rightArmExtendMotor = new CANSparkMax(6, CANSparkMaxLowLevel.MotorType.kBrushless);
+    public static CANSparkMax leftArmExtendMotor = new CANSparkMax(5, CANSparkMaxLowLevel.MotorType.kBrushed);
+    public static CANSparkMax rightArmExtendMotor = new CANSparkMax(6, CANSparkMaxLowLevel.MotorType.kBrushed);
 
     //Pneumatics - 2 double solenoids (2 arms)
     //push out to tilt, pull back to straight
