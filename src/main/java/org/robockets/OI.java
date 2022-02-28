@@ -11,6 +11,9 @@ public class OI {
     public static JoystickButton b = new JoystickButton(xbox, 1);
     public static JoystickButton x = new JoystickButton(xbox, 2);
     public static JoystickButton y = new JoystickButton(xbox, 3);
+	
+	public static double left_trigger = xbox.getRawAxis(6);
+	public static double right_trigger = xbox.getRawAxis(7);
 
     //<Button Board goes here>
     //Side with switch and green button is left side
@@ -112,6 +115,23 @@ public class OI {
     public static final JoystickButton ab30 = new JoystickButton(auto,30);
     public static final JoystickButton ab31 = new JoystickButton(auto,31);
     public static final JoystickButton ab32 = new JoystickButton(auto,32);
+	
+	// Referenced buttons that make knowing which button does what so much easier
+	// Java is disgusting I just want to pass it in by reference but now I don't know if I'm making a copy or not
+	// camelCase??? never heard of it!
+	
+	public static final JoystickButton back_intake_wheel;
+	public static final JoystickButton back_intake_pneumatic;
+	
+	public static final JoystickButton front_intake_wheel;
+	public static final JoystickButton ftont_intake_pneumatic;
+	
+	public static final JoystickButton extend_arm;
+	public static final JoystickButton retract_arm;
+	
+	
+	public static final JoystickButton auto1;
+	
 
     public OI(){
         a.whenPressed(new ExtendArmCommand());
