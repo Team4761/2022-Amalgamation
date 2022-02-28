@@ -73,8 +73,13 @@ public class RobotMap {
      * Eddies Code that HE finally Uploaded!!
      */
 
-    public static WPI_TalonFX c_ShooterLeft = new WPI_TalonFX(7);
-    public static WPI_TalonFX c_ShooterRight = new WPI_TalonFX(8);
+    public static WPI_TalonFX ShooterLeft = new WPI_TalonFX(7);
+    public static WPI_TalonFX ShooterRight = new WPI_TalonFX(8);
+	
+	public static CANSparkMax hood_adjust = new CANSparkMax(11);
+	public static CANCoder c_hood_adjust = new CANCoder(11);
+	
+	public static CANSparkMax inside_wheel = new CANSparkMax(12); // This can just run on it's own to be honest
 
     public static MotorControllerGroup robotShoot = new MotorControllerGroup(c_ShooterLeft, c_ShooterRight);
 

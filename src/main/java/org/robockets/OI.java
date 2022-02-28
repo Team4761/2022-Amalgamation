@@ -121,9 +121,10 @@ public class OI {
     public static final JoystickButton ab31 = new JoystickButton(auto,31);
     public static final JoystickButton ab32 = new JoystickButton(auto,32);
 	
-	// Referenced buttons that make knowing which button does what so much easier
 	// Java is disgusting I just want to pass it in by reference but now I don't know if I'm making a copy or not
 	// camelCase??? never heard of it!
+	
+	// Here we'll assign which is which later, this makes it easier to look at a button and go "wait, what does this button do?"
 	
 	public static final JoystickButton back_intake_wheel;
 	public static final JoystickButton back_intake_pneumatic;
@@ -134,10 +135,16 @@ public class OI {
 	public static final JoystickButton extend_arm;
 	public static final JoystickButton retract_arm;
 	
+	public static final JoystickButton hood_raise;
+	public static final JoystickButton hood_lower;
+	
+	public static final JoystickButton activate_fly_wheel_max_speed; // this might also activate the wheel in the shaft
 	
 	public static final JoystickButton auto1;
+	public static final JoystickButton auto2;
 	
 
+	// If pressing a button does something, add that here!
     public OI(){
         a.whenPressed(new ExtendArmCommand());
         b.whenPressed(new RetractArmCommand());

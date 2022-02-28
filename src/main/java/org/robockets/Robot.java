@@ -36,6 +36,9 @@ public class Robot extends TimedRobot
     public static final DrivetrainSubsystem m_drivetrain = DrivetrainSubsystem.getInstance();
     public static final IntakeSubsystem m_intake = IntakeSubsystem.getInstance();
     public static final ShooterSubsystem m_shooter = ShooterSubsystem.getInstance();
+	
+	// OI
+	public static final OI m_oi;
 
     /**
      * This method is run when the robot is first started up and should be used for any
@@ -48,6 +51,8 @@ public class Robot extends TimedRobot
         // Yes I COULD have all this in the same class, but it's nicer when it's separated
         AutonomousOptions.addOptions(chooser);
         SmartDashboard.putData("Auto choices", chooser);
+		
+		m_oi = new OI();
     }
     
     
