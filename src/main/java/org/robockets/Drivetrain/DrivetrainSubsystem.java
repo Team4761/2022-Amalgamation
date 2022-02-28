@@ -58,22 +58,22 @@ public class DrivetrainSubsystem extends SubsystemBase {
         double r_dist = RobotMap.c_front_right.getPosition() * GearRatios.drivetrain;
         RobotMap.m_odometry.update(angle,l_dist,r_dist);
 
-		// I HATE Java!
-		// I wanted to add a define preprocessor here so right_flight_stick not existing wouldn't through an error, but screw me!
+        // I HATE Java!
+        // I wanted to add a define preprocessor here so right_flight_stick not existing wouldn't through an error, but screw me!
 		
-		// There's a built in ramp feature so it will ALL work out
-		//TODO: Check the axis values
+        // There's a built in ramp feature so it will ALL work out
+        //TODO: Check the axis values
         if(driveType == TANK){
-			//double trans_right = OI.right_flight_stick.getRawAxis(1);
-			//double trans_left = OI.left_flight_stick.getRawAxis(1);
+            //double trans_right = OI.right_flight_stick.getRawAxis(1);
+            //double trans_left = OI.left_flight_stick.getRawAxis(1);
             //RobotMap.m_drive.tankDrive(-trans_left,trans_right);
         }
-		if(driveType == ARCADE){
-			double rot = OI.xbox.getRawAxis(1);
-			double trans = OI.xbox.getRawAxis(2);
+        if(driveType == ARCADE){
+            double rot = OI.xbox.getRawAxis(1);
+            double trans = OI.xbox.getRawAxis(2);
 
-			RobotMap.m_drive.arcadeDrive(trans,rot);
-		}
+            RobotMap.m_drive.arcadeDrive(trans,rot);
+        }
     }
 
     /**
