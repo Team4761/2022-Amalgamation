@@ -2,6 +2,8 @@ package org.robockets.Intake;
 
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.robockets.OI;
+import org.robockets.RobotMap;
 
 public class IntakeSubsystem extends SubsystemBase {
 
@@ -40,7 +42,12 @@ public class IntakeSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        //TODO: Complete the DAMN button board!
+		// This SHOULD be the up and down axis on the second stick
+		double speed = OI.xbox.getRawAxis(3);
+		
+		// This way, setting the speed will make both intakes pull in, or both intakes shoot out
+		RobotMap.back_intake.set(speed);
+		RobotMap.front_intake.set(-speed);
     }
 
 }
