@@ -14,8 +14,8 @@ public class OI {
     public static JoystickButton x = new JoystickButton(xbox, 2);
     public static JoystickButton y = new JoystickButton(xbox, 3);
 	
-    public static double left_trigger = xbox.getRawAxis(6);
-    public static double right_trigger = xbox.getRawAxis(7);
+    public static double left_trigger = xbox.getRawAxis(2);
+    public static double right_trigger = xbox.getRawAxis(3);
 
     //<Button Board goes here>
     //Side with switch and green button is left side

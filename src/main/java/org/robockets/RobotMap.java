@@ -6,10 +6,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
@@ -47,9 +44,14 @@ public class RobotMap {
     // Intake
     public static CANSparkMax back_intake = new CANSparkMax(9, CANSparkMaxLowLevel.MotorType.kBrushed);
     public static CANSparkMax front_intake = new CANSparkMax(10, CANSparkMaxLowLevel.MotorType.kBrushed);
+
     // Is this DIO ports?
     public static Solenoid back_pull = new Solenoid(PneumaticsModuleType.CTREPCM,0);
     public static Solenoid front_pull = new Solenoid(PneumaticsModuleType.CTREPCM,1);
+
+    // Doesn't know which is which!
+    public static PneumaticsControlModule intake_out = new PneumaticsControlModule(1);
+    public static PneumaticsControlModule intake_in = new PneumaticsControlModule(0);
 
     /**
      * YO!!! Braden Code!
