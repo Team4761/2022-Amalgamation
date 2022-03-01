@@ -108,6 +108,7 @@ public class OI {
 	public static final JoystickButton hood_raise = mb7;
 	public static final JoystickButton hood_lower = mb8;
 
+    // These are written up!
     public static final JoystickButton move_climber_out = mb31;
     public static final JoystickButton move_climber_in = mb30;
 
