@@ -8,8 +8,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void Shoot(double power){
       //artifact from eddie idk if this was supposed to work or not  RobotMap.robotShoot.setReferenceRPM(power);
-        RobotMap.c_ShooterLeft.set(ControlMode.Velocity, power);
-        RobotMap.c_ShooterRight.set(ControlMode.Velocity, power);
+        RobotMap.ShooterLeft.set(ControlMode.Velocity, power);
+        RobotMap.ShooterRight.set(ControlMode.Velocity, power);
     }
 
     // With eager singleton initialization, any static variables/fields used in the 

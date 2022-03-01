@@ -57,7 +57,9 @@ public class IntakeSubsystem extends SubsystemBase {
         //Toggle between Intake being pushed out or pulled
         DoubleSolenoid.Value v = stat ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;
         RobotMap.intakeSolenoid.set(v);
-        stat = !stat;
+
+        //if a button is pressed, change stat
+        //stat = !stat;
     }
 
 }
