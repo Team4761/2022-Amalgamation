@@ -120,8 +120,8 @@ public class OI {
 
 	// If pressing a button does something, add that here!
     public OI(){
-        a.whenPressed(new ExtendArmCommand());
-        b.whenPressed(new RetractArmCommand());
+        //a.whenPressed(new ExtendArmCommand());
+        //b.whenPressed(new RetractArmCommand());
     }
 
 }

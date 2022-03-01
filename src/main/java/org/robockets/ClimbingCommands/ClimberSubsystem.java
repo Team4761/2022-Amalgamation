@@ -53,5 +53,8 @@ public class ClimberSubsystem extends SubsystemBase {
 
         DoubleSolenoid.Value v = move_climber_in.get() ? DoubleSolenoid.Value.kForward : (move_climber_out.get() ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kOff);
         RobotMap.ClimberSolenoids.set(v);
+        
+        double ClimberSpeed = OI.xbox.getRawAxis(5);
+        RobotMap.ArmExtendMotor.set(ClimberSpeed);
     }
 }
