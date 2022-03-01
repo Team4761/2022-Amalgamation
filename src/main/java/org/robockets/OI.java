@@ -2,6 +2,8 @@ package org.robockets;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import org.robockets.ClimbingCommands.ExtendArmCommand;
+import org.robockets.ClimbingCommands.RetractArmCommand;
 
 public class OI {
 
@@ -126,22 +128,22 @@ public class OI {
 	
 	// Here we'll assign which is which later, this makes it easier to look at a button and go "wait, what does this button do?"
 	
-	public static final JoystickButton back_intake_wheel;
-	public static final JoystickButton back_intake_pneumatic;
+	public static final JoystickButton back_intake_wheel = mb1;
+	public static final JoystickButton back_intake_pneumatic = mb2;
 	
-	public static final JoystickButton front_intake_wheel;
-	public static final JoystickButton ftont_intake_pneumatic;
+	public static final JoystickButton front_intake_wheel = mb3;
+	public static final JoystickButton front_intake_pneumatic = mb4;
 	
-	public static final JoystickButton extend_arm;
-	public static final JoystickButton retract_arm;
+	public static final JoystickButton extend_arm = mb5;
+	public static final JoystickButton retract_arm = mb6;
 	
-	public static final JoystickButton hood_raise;
-	public static final JoystickButton hood_lower;
+	public static final JoystickButton hood_raise = mb7;
+	public static final JoystickButton hood_lower = mb8;
 	
-	public static final JoystickButton activate_fly_wheel_max_speed; // this might also activate the wheel in the shaft
+	public static final JoystickButton activate_fly_wheel_max_speed = mb9; // this might also activate the wheel in the shaft
 	
-	public static final JoystickButton auto1;
-	public static final JoystickButton auto2;
+	public static final JoystickButton auto1 = mb10;
+	public static final JoystickButton auto2 = mb10;
 	
 
 	// If pressing a button does something, add that here!
