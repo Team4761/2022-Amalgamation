@@ -45,13 +45,8 @@ public class RobotMap {
     public static CANSparkMax back_intake = new CANSparkMax(9, CANSparkMaxLowLevel.MotorType.kBrushed);
     public static CANSparkMax front_intake = new CANSparkMax(10, CANSparkMaxLowLevel.MotorType.kBrushed);
 
-    // Is this DIO ports?
-    public static Solenoid back_pull = new Solenoid(PneumaticsModuleType.CTREPCM,0);
-    public static Solenoid front_pull = new Solenoid(PneumaticsModuleType.CTREPCM,1);
-
-    // Doesn't know which is which!
-    public static PneumaticsControlModule intake_out = new PneumaticsControlModule(1);
-    public static PneumaticsControlModule intake_in = new PneumaticsControlModule(0);
+    // 2 is push out, 3 is in
+    public static DoubleSolenoid intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,2,3);
 
     /**
      * YO!!! Braden Code!
@@ -62,14 +57,8 @@ public class RobotMap {
     public static CANSparkMax leftArmExtendMotor = new CANSparkMax(5, CANSparkMaxLowLevel.MotorType.kBrushed);
     public static CANSparkMax rightArmExtendMotor = new CANSparkMax(6, CANSparkMaxLowLevel.MotorType.kBrushed);
 
-    //Pneumatics - 2 double solenoids (2 arms)
-    //push out to tilt, pull back to straight
-    //left and right solenoids both in one DIO - controlled as one
-    public static DoubleSolenoid ClimberSolenoids = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1);
-    //public static DoubleSolenoid leftClimberSolenoids = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 3);
-    //parameters - UPDATE THE CHANNEL LOCATIONS/MODULE TYPE ONCE DECIDED BY MECHANICAL/ELECTRICAL
-    //ModuleType - based on type of pneumatics
-    //channels in Digital IO which control up and down of pneumatic
+    // 0 is angle down, 1 is angle up
+    public static DoubleSolenoid ClimberSolenoids = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
 
     /**
      * Eddies Code that HE finally Uploaded!!

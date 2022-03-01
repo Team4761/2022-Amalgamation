@@ -1,6 +1,7 @@
 package org.robockets.Intake;
 
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.robockets.OI;
 import org.robockets.RobotMap;
@@ -10,6 +11,10 @@ public class IntakeSubsystem extends SubsystemBase {
     // With eager singleton initialization, any static variables/fields used in the 
     // constructor must appear before the "INSTANCE" variable so that they are initialized 
     // before the constructor is called when the "INSTANCE" variable initializes.
+
+    private final boolean OUT = false;
+    private final boolean IN = true;
+    private boolean stat = IN;
 
     /**
      * The Singleton instance of this IntakeSubsystem. Code should use
@@ -43,11 +48,16 @@ public class IntakeSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         // This SHOULD be the up and down axis on the second stick
-        double speed = OI.xbox.getRawAxis(3);
+        double speed = OI.xbox.getRawAxis(5);
 		
         // This way, setting the speed will make both intakes pull in, or both intakes shoot out
         RobotMap.back_intake.set(speed);
         RobotMap.front_intake.set(-speed);
+
+        //Toggle between Intake being pushed out or pulled
+        DoubleSolenoid.Value v = stat ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;
+        RobotMap.intakeSolenoid.set(v);
+        stat = !stat;
     }
 
 }

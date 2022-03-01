@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import org.robockets.ClimbingCommands.ClimberSubsystem;
 import org.robockets.Drivetrain.DrivetrainSubsystem;
 import org.robockets.Drivetrain.pathWeaverInterpreter;
 import org.robockets.Intake.IntakeSubsystem;
@@ -36,9 +37,10 @@ public class Robot extends TimedRobot
     public static final DrivetrainSubsystem m_drivetrain = DrivetrainSubsystem.getInstance();
     public static final IntakeSubsystem m_intake = IntakeSubsystem.getInstance();
     public static final ShooterSubsystem m_shooter = ShooterSubsystem.getInstance();
+    public static final ClimberSubsystem m_climber = ClimberSubsystem.getInstance();
 	
 	// OI
-	public static final OI m_oi;
+	public static OI m_oi;
 
     /**
      * This method is run when the robot is first started up and should be used for any
