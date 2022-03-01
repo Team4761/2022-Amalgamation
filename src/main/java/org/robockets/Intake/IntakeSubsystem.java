@@ -59,7 +59,7 @@ public class IntakeSubsystem extends SubsystemBase {
         RobotMap.intakeSolenoid.set(v);
 
         //if a button is pressed, change stat
-        //stat = !stat;
+        stat = OI.intake_pneumatic.get();
     }
 
 }
