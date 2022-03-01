@@ -1,7 +1,13 @@
 package org.robockets.ClimbingCommands;
 
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.robockets.OI;
+import org.robockets.RobotMap;
+
+import static org.robockets.OI.move_climber_in;
+import static org.robockets.OI.move_climber_out;
 
 public class ClimberSubsystem extends SubsystemBase {
 
@@ -42,8 +48,10 @@ public class ClimberSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        move_climber_out.whenPressed(new ForwardArmCommand);
-        move_climber_in.whenPressed(new BackwardArmCommand);
+        //move_climber_out.whenPressed(new ForwardArmCommand());
+        //move_climber_in.whenPressed(new BackwardArmCommand());
+
+        DoubleSolenoid.Value v = move_climber_in.get() ? DoubleSolenoid.Value.kForward : (move_climber_out.get() ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kOff);
+        RobotMap.ClimberSolenoids.set(v);
     }
 }
-
