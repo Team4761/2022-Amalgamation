@@ -71,8 +71,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
             //RobotMap.m_drive.tankDrive(-trans_left,trans_right);
         }
         if(driveType == ARCADE){
-            double rot = OI.xbox.getRawAxis(1);
-            double trans = OI.xbox.getRawAxis(0);
+            double rot = OI.xbox.getRawAxis(0);
+            double trans = OI.xbox.getRawAxis(1);
 
             RobotMap.m_drive.arcadeDrive(trans,rot);
         }

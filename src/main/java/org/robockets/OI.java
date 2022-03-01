@@ -2,8 +2,6 @@ package org.robockets;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import org.robockets.ClimbingCommands.ExtendArmCommand;
-import org.robockets.ClimbingCommands.RetractArmCommand;
 
 public class OI {
 
@@ -100,25 +98,25 @@ public class OI {
 	// Here we'll assign which is which later, this makes it easier to look at a button and go "wait, what does this button do?"
 
     // These three are written up!
-	public static final JoystickButton back_intake_wheel = mb1;
-    public static final JoystickButton front_intake_wheel = mb3;
+	public static final JoystickButton back_intake_wheel = mb4;
+    public static final JoystickButton front_intake_wheel = mb6;
 	public static final JoystickButton intake_pneumatic = mb2;
 
     // These two are written up!
-	public static final JoystickButton hood_raise = mb7;
-	public static final JoystickButton hood_lower = mb8;
+	public static final JoystickButton hood_raise = mb9;
+	public static final JoystickButton hood_lower = ab2;
 
     // These are written up!
-    public static final JoystickButton move_climber_out = mb31;
-    public static final JoystickButton move_climber_in = mb30;
+    public static final JoystickButton move_climber_not_used = mb31;
+    public static final JoystickButton move_climber = mb30;
 
     // This is written up!
-	public static final JoystickButton activate_fly_wheel_max_speed = mb9; // this might also activate the wheel in the shaft
+	public static final JoystickButton activate_fly_wheel_max_speed = mb10; // this might also activate the wheel in the shaft
 	
-	public static final JoystickButton auto1 = mb10;
-	public static final JoystickButton auto2 = mb10;
+	public static final JoystickButton auto1 = ab5;
+	public static final JoystickButton auto2 = ab12;
 
-	// If pressing a button does something, add that here!
+	// If pressing a button runs a command, add that here!
     public OI(){
         //a.whenPressed(new ExtendArmCommand());
         //b.whenPressed(new RetractArmCommand());

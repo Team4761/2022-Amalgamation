@@ -60,6 +60,9 @@ public class Robot extends TimedRobot
 		
 		m_oi = new OI(); // never used, oh well
 
+        // Reverse all the motors that are needed
+        //RobotMap.leftArmExtendMotor.setInverted(true);
+
         commandScheduler.registerSubsystem(m_intake);
         commandScheduler.registerSubsystem(m_drivetrain);
         commandScheduler.registerSubsystem(m_climber);
@@ -85,11 +88,12 @@ public class Robot extends TimedRobot
      */
     @Override
     public void robotPeriodic() {
-        SmartDashboard.updateValues();
 
         // update this with a button or something
-        if(OI.y.get())
+        if(OI.y.get()) {
             updateModels();
+            SmartDashboard.updateValues();
+        }
     }
 
     private void updateModels() {

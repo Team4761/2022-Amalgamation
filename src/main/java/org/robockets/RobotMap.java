@@ -42,8 +42,8 @@ public class RobotMap {
     public static DifferentialDriveOdometry m_odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
 
     // Intake
-    public static CANSparkMax back_intake = new CANSparkMax(9, CANSparkMaxLowLevel.MotorType.kBrushed);
-    public static CANSparkMax front_intake = new CANSparkMax(10, CANSparkMaxLowLevel.MotorType.kBrushed);
+    public static CANSparkMax back_intake = new CANSparkMax(9, CANSparkMaxLowLevel.MotorType.kBrushless);
+    public static CANSparkMax front_intake = new CANSparkMax(10, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     // 2 is push out, 3 is in
     public static DoubleSolenoid intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,2,3);
@@ -54,8 +54,8 @@ public class RobotMap {
 
     //Motors - 2 motors (2 arms) RobotMap
     //change motor eventually. And ports, etc. CANSparkMax. Parameters
-    public static CANSparkMax leftArmExtendMotor = new CANSparkMax(5, CANSparkMaxLowLevel.MotorType.kBrushed);
-    public static CANSparkMax rightArmExtendMotor = new CANSparkMax(6, CANSparkMaxLowLevel.MotorType.kBrushed);
+    public static CANSparkMax leftArmExtendMotor = new CANSparkMax(5, CANSparkMaxLowLevel.MotorType.kBrushless);
+    public static CANSparkMax rightArmExtendMotor = new CANSparkMax(6, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     public static MotorControllerGroup ArmExtendMotor = new MotorControllerGroup(leftArmExtendMotor,rightArmExtendMotor);
     // 0 is angle down, 1 is angle up

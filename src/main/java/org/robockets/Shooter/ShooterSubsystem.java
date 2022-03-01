@@ -51,6 +51,7 @@ public class ShooterSubsystem extends SubsystemBase {
         // set motor speed
         double speed = OI.activate_fly_wheel_max_speed.get() ? 1.0 : 0.0;
         RobotMap.robotShoot.set(RobotMap.robotShoot.get() + speed); // This way if another command is running the shooter, we don't brute force set it to 0
+        RobotMap.inside_wheel.set(speed);
 
         // adjust shooter
         double hoodShooterSpeed = OI.hood_raise.get() ? 1.0 : (OI.hood_lower.get() ? -1.0 : 0.0);
