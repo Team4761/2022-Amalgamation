@@ -102,13 +102,15 @@ public class OI {
 	public static final JoystickButton back_intake_wheel = mb1;
     public static final JoystickButton front_intake_wheel = mb3;
 	public static final JoystickButton intake_pneumatic = mb2;
-	
+
+    // These two are written up!
 	public static final JoystickButton hood_raise = mb7;
 	public static final JoystickButton hood_lower = mb8;
-    
+
     public static final JoystickButton move_climber_out = mb31;
     public static final JoystickButton move_climber_in = mb30;
-	
+
+    // This is written up!
 	public static final JoystickButton activate_fly_wheel_max_speed = mb9; // this might also activate the wheel in the shaft
 	
 	public static final JoystickButton auto1 = mb10;
