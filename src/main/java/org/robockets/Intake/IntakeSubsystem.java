@@ -48,7 +48,7 @@ public class IntakeSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         // This SHOULD be the up and down axis on the second stick
-        double speed = OI.xbox.getRawAxis(5);
+        double speed = OI.auto.getRawAxis(3);
 		
         // This way, setting the speed will make both intakes pull in, or both intakes shoot out
         RobotMap.back_intake.set(speed);

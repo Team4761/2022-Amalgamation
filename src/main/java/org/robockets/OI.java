@@ -13,9 +13,6 @@ public class OI {
     public static JoystickButton b = new JoystickButton(xbox, 1);
     public static JoystickButton x = new JoystickButton(xbox, 2);
     public static JoystickButton y = new JoystickButton(xbox, 3);
-	
-    public static double left_trigger = xbox.getRawAxis(2);
-    public static double right_trigger = xbox.getRawAxis(3);
 
     //<Button Board goes here>
     //Side with switch and green button is left side
@@ -103,13 +100,8 @@ public class OI {
 	// Here we'll assign which is which later, this makes it easier to look at a button and go "wait, what does this button do?"
 	
 	public static final JoystickButton back_intake_wheel = mb1;
-	public static final JoystickButton back_intake_pneumatic = mb2;
-	
-	public static final JoystickButton front_intake_wheel = mb3;
-	public static final JoystickButton front_intake_pneumatic = mb4;
-	
-	public static final JoystickButton extend_arm = mb5;
-	public static final JoystickButton retract_arm = mb6;
+    public static final JoystickButton front_intake_wheel = mb3;
+	public static final JoystickButton intake_pneumatic = mb2;
 	
 	public static final JoystickButton hood_raise = mb7;
 	public static final JoystickButton hood_lower = mb8;
