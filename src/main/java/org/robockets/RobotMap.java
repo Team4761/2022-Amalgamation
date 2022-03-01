@@ -76,12 +76,12 @@ public class RobotMap {
     public static WPI_TalonFX ShooterLeft = new WPI_TalonFX(7);
     public static WPI_TalonFX ShooterRight = new WPI_TalonFX(8);
 	
-	public static CANSparkMax hood_adjust = new CANSparkMax(11);
+	public static CANSparkMax hood_adjust = new CANSparkMax(11, CANSparkMaxLowLevel.MotorType.kBrushless);
 	public static CANCoder c_hood_adjust = new CANCoder(11);
 	
-	public static CANSparkMax inside_wheel = new CANSparkMax(12); // This can just run on it's own to be honest
+	public static CANSparkMax inside_wheel = new CANSparkMax(12, CANSparkMaxLowLevel.MotorType.kBrushed); // This can just run on it's own to be honest
 
-    public static MotorControllerGroup robotShoot = new MotorControllerGroup(c_ShooterLeft, c_ShooterRight);
+    public static MotorControllerGroup robotShoot = new MotorControllerGroup(ShooterLeft, ShooterRight);
 
 
 }
