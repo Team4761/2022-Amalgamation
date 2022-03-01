@@ -94,11 +94,12 @@ public class OI {
     public static final JoystickButton ab31 = new JoystickButton(auto,31);
     public static final JoystickButton ab32 = new JoystickButton(auto,32);
 	
-	// Java is disgusting I just want to pass it in by reference but now I don't know if I'm making a copy or not
+	// Java is disgusting I just want to pass it in by reference, but now I don't know if I'm making a copy or not
 	// camelCase??? never heard of it!
 	
 	// Here we'll assign which is which later, this makes it easier to look at a button and go "wait, what does this button do?"
-	
+
+    // These three are written up!
 	public static final JoystickButton back_intake_wheel = mb1;
     public static final JoystickButton front_intake_wheel = mb3;
 	public static final JoystickButton intake_pneumatic = mb2;
@@ -115,7 +116,6 @@ public class OI {
 	
 	public static final JoystickButton auto1 = mb10;
 	public static final JoystickButton auto2 = mb10;
-	
 
 	// If pressing a button does something, add that here!
     public OI(){

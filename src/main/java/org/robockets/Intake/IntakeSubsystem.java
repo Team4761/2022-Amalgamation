@@ -47,12 +47,16 @@ public class IntakeSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        // This SHOULD be the up and down axis on the second stick
+        // this is the right trigger
         double speed = OI.auto.getRawAxis(3);
 		
         // This way, setting the speed will make both intakes pull in, or both intakes shoot out
         RobotMap.back_intake.set(speed);
         RobotMap.front_intake.set(-speed);
+
+        //We can also control the speed of the intake wheels using the OI buttons
+        if(OI.back_intake_wheel.get()) RobotMap.back_intake.set(RobotMap.back_intake.get() + 1.0);
+        if(OI.front_intake_wheel.get()) RobotMap.front_intake.set(RobotMap.front_intake.get() + 1.0);
 
         //Toggle between Intake being pushed out or pulled
         DoubleSolenoid.Value v = stat ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;

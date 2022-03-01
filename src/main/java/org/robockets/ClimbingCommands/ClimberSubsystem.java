@@ -42,11 +42,9 @@ public class ClimberSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        
-        //button.whenPressed(new ForwardArmCommand);
-        //button.whenPressed(new BackwarArmCommand);
-        
-        
+        // Toggle between going up and down
+
+        // Toggle between angled and not angled
     }
 }
 
