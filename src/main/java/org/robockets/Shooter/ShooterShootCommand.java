@@ -39,7 +39,7 @@ public class ShooterShootCommand extends CommandBase {
         double cos = Math.cos(rtheta);
         
         double velocity = mathstuff.findVelocity(ty.getDouble(0.0));
-        double rpm = (30*velocity)/((22/7)*(mathstuff.r_wheel_meters/39.37));
+        double rpm = (30*velocity)/((Math.PI)*(mathstuff.r_wheel_meters/39.37));
         
         //regular
         double radius = 2;
@@ -48,8 +48,8 @@ public class ShooterShootCommand extends CommandBase {
         double Hspeedms = Math.sqrt((9.81*5.32)/(d*d));
         double Lspeedms = Math.sqrt((9.81*3.68)/(d*d));
 
-        double Hrpm = (30*Hspeedms)/((22/7)*(radius/39.37));
-        double Lrpm = (30*Lspeedms)/((22/7)*(radius/39.37));
+        double Hrpm = (30*Hspeedms)/((Math.PI)*(radius/39.37));
+        double Lrpm = (30*Lspeedms)/((Math.PI)*(radius/39.37));
         
         //rename Button1, Button2, Button3 to whatever the buttons wanted for shooting are named in OI.java
         boolean testing = false; //TODO so the buttons don't work the way the code had og and i don't have a way to do this without making 3 commands so for now its just for variable distance
