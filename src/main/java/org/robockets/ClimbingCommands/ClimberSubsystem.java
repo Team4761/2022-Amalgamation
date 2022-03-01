@@ -42,8 +42,8 @@ public class ClimberSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        //button.whenPressed(new ForwardArmCommand);
-        //button.whenPressed(new BackwardArmCommand);
+        move_climber_out.whenPressed(new ForwardArmCommand);
+        move_climber_in.whenPressed(new BackwardArmCommand);
     }
 }
 
