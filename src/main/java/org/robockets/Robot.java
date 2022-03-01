@@ -5,8 +5,11 @@
 
 package org.robockets;
 
+import com.ctre.phoenix.sensors.CANCoderConfiguration;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -49,17 +52,27 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit()
     {
+        System.out.println("Press Y to update Smart Dashboard values!");
         // adds all the auto options to it
         // Yes I COULD have all this in the same class, but it's nicer when it's separated
         AutonomousOptions.addOptions(chooser);
         SmartDashboard.putData("Auto choices", chooser);
 		
-		m_oi = new OI();
+		m_oi = new OI(); // never used, oh well
 
         commandScheduler.registerSubsystem(m_intake);
         commandScheduler.registerSubsystem(m_drivetrain);
         commandScheduler.registerSubsystem(m_climber);
         commandScheduler.registerSubsystem(m_shooter);
+
+        // Adding necessary additions to smart dashboard
+
+        PIDController drivetrainpid = new PIDController(0,0,0);
+        //SmartDashboard.putData("Drivetrain PID", pc);
+        SmartDashboard.putNumberArray("Drivetrain PID", new double[]{drivetrainpid.getP(), drivetrainpid.getI(), drivetrainpid.getD()});
+
+        PIDController shooterpid = new PIDController(0,0,0);
+        SmartDashboard.putNumberArray("Shooter PID", new double[]{shooterpid.getP(), shooterpid.getI(), shooterpid.getD()});
     }
     
     
@@ -71,8 +84,43 @@ public class Robot extends TimedRobot
      * SmartDashboard integrated updating.
      */
     @Override
-    public void robotPeriodic() {}
-    
+    public void robotPeriodic() {
+        SmartDashboard.updateValues();
+
+        // update this with a button or something
+        if(OI.y.get())
+            updateModels();
+    }
+
+    private void updateModels() {
+        // update drivetrain PID
+        double[] drivepid = SmartDashboard.getNumberArray("Drivetrain PID", new double[3]);
+        RobotMap.front_right.config_kP(0,drivepid[0]);
+        RobotMap.front_right.config_kI(0,drivepid[1]);
+        RobotMap.front_right.config_kD(0,drivepid[2]);
+
+        RobotMap.back_right.config_kP(0,drivepid[0]);
+        RobotMap.back_right.config_kI(0,drivepid[1]);
+        RobotMap.back_right.config_kD(0,drivepid[2]);
+
+        RobotMap.front_left.config_kP(0,drivepid[0]);
+        RobotMap.front_left.config_kI(0,drivepid[1]);
+        RobotMap.front_left.config_kD(0,drivepid[2]);
+
+        RobotMap.back_left.config_kP(0,drivepid[0]);
+        RobotMap.back_left.config_kI(0,drivepid[1]);
+        RobotMap.back_left.config_kD(0,drivepid[2]);
+
+        // update shooter PID
+        double[] shootpid = SmartDashboard.getNumberArray("Shooter PID", new double[3]);
+        RobotMap.ShooterLeft.config_kP(0,shootpid[0]);
+        RobotMap.ShooterLeft.config_kI(0,shootpid[1]);
+        RobotMap.ShooterLeft.config_kD(0,shootpid[2]);
+
+        RobotMap.ShooterRight.config_kP(0,shootpid[0]);
+        RobotMap.ShooterRight.config_kI(0,shootpid[1]);
+        RobotMap.ShooterRight.config_kD(0,shootpid[2]);
+    }
     
     /**
      * This autonomous (along with the chooser code above) shows how to select between different
