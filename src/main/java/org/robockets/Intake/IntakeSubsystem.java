@@ -55,8 +55,8 @@ public class IntakeSubsystem extends SubsystemBase {
         RobotMap.front_intake.set(-speed);
 
         //We can also control the speed of the intake wheels using the OI buttons
-        if(OI.back_intake_wheel.get()) RobotMap.back_intake.set(RobotMap.back_intake.get() + 1.0);
-        if(OI.front_intake_wheel.get()) RobotMap.front_intake.set(RobotMap.front_intake.get() + 1.0);
+        if(OI.back_intake_wheel.get()) RobotMap.back_intake.set(-1.0);
+        if(OI.front_intake_wheel.get()) RobotMap.front_intake.set(-1.0);
 
         //Toggle between Intake being pushed out or pulled
         DoubleSolenoid.Value v = stat ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;

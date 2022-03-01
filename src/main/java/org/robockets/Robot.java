@@ -62,22 +62,30 @@ public class Robot extends TimedRobot
 
         // Reverse all the motors that are needed
         //RobotMap.leftArmExtendMotor.setInverted(true);
+        RobotMap.m_rightMotors.setInverted(true);
 
         commandScheduler.registerSubsystem(m_intake);
         commandScheduler.registerSubsystem(m_drivetrain);
         commandScheduler.registerSubsystem(m_climber);
         commandScheduler.registerSubsystem(m_shooter);
 
-        // Adding necessary additions to smart dashboard
-
-        PIDController drivetrainpid = new PIDController(0,0,0);
-        //SmartDashboard.putData("Drivetrain PID", pc);
-        SmartDashboard.putNumberArray("Drivetrain PID", new double[]{drivetrainpid.getP(), drivetrainpid.getI(), drivetrainpid.getD()});
-
-        PIDController shooterpid = new PIDController(0,0,0);
-        SmartDashboard.putNumberArray("Shooter PID", new double[]{shooterpid.getP(), shooterpid.getI(), shooterpid.getD()});
+        // le almighty
+        applyToShuffleboard();
     }
-    
+
+    /**
+     * Now we will add any necessary additions to SmartDashboard
+     * For the most part, anything added here will be simple modifiable values such as:
+     * motor speeds, constants, button IDs, PID values,
+     * Camera Streams, raspberry PI auto code selectors, Stuff like that!
+     * Check Varyings.java for more
+     */
+    public void applyToShuffleboard() {
+        SmartDashboard.putData("Drivetrain PID", Varyings.drivetrainpid);
+        SmartDashboard.putData("Shooter PID", Varyings.shooterpid);
+        SmartDashboard.putNumber("Max Drivetrain Speed", Varyings.drivetrainMaxSpeed);
+        SmartDashboard.putNumber("Max Drivetrain Rotational Speed", Varyings.drivetrainMaxRotationSpeed);
+    }
     
     /**
      * This method is called every robot packet, no matter the mode. Use this for items like
@@ -90,40 +98,44 @@ public class Robot extends TimedRobot
     public void robotPeriodic() {
 
         // update this with a button or something
-        if(OI.y.get()) {
-            updateModels();
-            SmartDashboard.updateValues();
-        }
+        //if(OI.y.get()) {
+        updateModels();
+        SmartDashboard.updateValues();
+        //}
     }
 
+    /**
+     * This function here is responsible for updating the data that is being sent from shuffeboard
+     */
     private void updateModels() {
         // update drivetrain PID
-        double[] drivepid = SmartDashboard.getNumberArray("Drivetrain PID", new double[3]);
-        RobotMap.front_right.config_kP(0,drivepid[0]);
-        RobotMap.front_right.config_kI(0,drivepid[1]);
-        RobotMap.front_right.config_kD(0,drivepid[2]);
+        // NOTE: Sendable is more or less an array of bytes, which allows us to convert that into any object we want!
+        Varyings.drivetrainpid = (PIDController) SmartDashboard.getData("Drivetrain PID");
+        RobotMap.front_right.config_kP(0,Varyings.drivetrainpid.getP());
+        RobotMap.front_right.config_kI(0,Varyings.drivetrainpid.getI());
+        RobotMap.front_right.config_kD(0,Varyings.drivetrainpid.getD());
 
-        RobotMap.back_right.config_kP(0,drivepid[0]);
-        RobotMap.back_right.config_kI(0,drivepid[1]);
-        RobotMap.back_right.config_kD(0,drivepid[2]);
+        RobotMap.back_right.config_kP(0,Varyings.drivetrainpid.getP());
+        RobotMap.back_right.config_kI(0,Varyings.drivetrainpid.getI());
+        RobotMap.back_right.config_kD(0,Varyings.drivetrainpid.getD());
 
-        RobotMap.front_left.config_kP(0,drivepid[0]);
-        RobotMap.front_left.config_kI(0,drivepid[1]);
-        RobotMap.front_left.config_kD(0,drivepid[2]);
+        RobotMap.front_left.config_kP(0,Varyings.drivetrainpid.getP());
+        RobotMap.front_left.config_kI(0,Varyings.drivetrainpid.getI());
+        RobotMap.front_left.config_kD(0,Varyings.drivetrainpid.getD());
 
-        RobotMap.back_left.config_kP(0,drivepid[0]);
-        RobotMap.back_left.config_kI(0,drivepid[1]);
-        RobotMap.back_left.config_kD(0,drivepid[2]);
+        RobotMap.back_left.config_kP(0,Varyings.drivetrainpid.getP());
+        RobotMap.back_left.config_kI(0,Varyings.drivetrainpid.getI());
+        RobotMap.back_left.config_kD(0,Varyings.drivetrainpid.getD());
 
         // update shooter PID
-        double[] shootpid = SmartDashboard.getNumberArray("Shooter PID", new double[3]);
-        RobotMap.ShooterLeft.config_kP(0,shootpid[0]);
-        RobotMap.ShooterLeft.config_kI(0,shootpid[1]);
-        RobotMap.ShooterLeft.config_kD(0,shootpid[2]);
+        Varyings.shooterpid = (PIDController) SmartDashboard.getData("Shooter PID");
+        RobotMap.ShooterLeft.config_kP(0,Varyings.shooterpid.getP());
+        RobotMap.ShooterLeft.config_kI(0,Varyings.shooterpid.getI());
+        RobotMap.ShooterLeft.config_kD(0,Varyings.shooterpid.getD());
 
-        RobotMap.ShooterRight.config_kP(0,shootpid[0]);
-        RobotMap.ShooterRight.config_kI(0,shootpid[1]);
-        RobotMap.ShooterRight.config_kD(0,shootpid[2]);
+        RobotMap.ShooterRight.config_kP(0,Varyings.shooterpid.getP());
+        RobotMap.ShooterRight.config_kI(0,Varyings.shooterpid.getI());
+        RobotMap.ShooterRight.config_kD(0,Varyings.shooterpid.getD());
     }
     
     /**

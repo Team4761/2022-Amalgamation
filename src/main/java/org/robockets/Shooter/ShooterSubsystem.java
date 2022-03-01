@@ -1,8 +1,10 @@
 package org.robockets.Shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.robockets.OI;
+import org.robockets.Robot;
 import org.robockets.RobotMap;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -49,9 +51,16 @@ public class ShooterSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         // set motor speed
-        double speed = OI.activate_fly_wheel_max_speed.get() ? 1.0 : 0.0;
-        RobotMap.robotShoot.set(RobotMap.robotShoot.get() + speed); // This way if another command is running the shooter, we don't brute force set it to 0
-        RobotMap.inside_wheel.set(speed);
+        double speed = OI.activate_fly_wheel_max_speed.get() ? 0.5 : 0.0;
+        System.out.println(speed);
+        if(!DriverStation.isAutonomous()) {
+            RobotMap.ShooterLeft.set(-speed);
+            RobotMap.ShooterRight.set(speed);
+        }
+            //RobotMap.robotShoot.set(speed); // This way if another command is running the shooter, we don't brute force set it to 0
+
+        double insidewheelspeed = OI.activate_inner_wheel.get() ? 0.5 : 0.0;
+        RobotMap.inside_wheel.set(insidewheelspeed);
 
         // adjust shooter
         double hoodShooterSpeed = OI.hood_raise.get() ? 1.0 : (OI.hood_lower.get() ? -1.0 : 0.0);

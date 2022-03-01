@@ -74,7 +74,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
             double rot = OI.xbox.getRawAxis(0);
             double trans = OI.xbox.getRawAxis(1);
 
-            RobotMap.m_drive.arcadeDrive(trans,rot);
+            RobotMap.m_drive.arcadeDrive(trans,-rot);
         }
     }
 

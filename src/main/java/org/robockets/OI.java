@@ -1,5 +1,6 @@
 package org.robockets;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -112,7 +113,8 @@ public class OI {
 
     // This is written up!
 	public static final JoystickButton activate_fly_wheel_max_speed = mb10; // this might also activate the wheel in the shaft
-	
+	public static final JoystickButton activate_inner_wheel = mb12;
+
 	public static final JoystickButton auto1 = ab5;
 	public static final JoystickButton auto2 = ab12;
 
