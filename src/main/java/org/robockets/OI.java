@@ -105,6 +105,9 @@ public class OI {
 	
 	public static final JoystickButton hood_raise = mb7;
 	public static final JoystickButton hood_lower = mb8;
+    
+    public static final JoystickButton move_climber_out = mb31;
+    public static final JoystickButton move_climber_in = mb30;
 	
 	public static final JoystickButton activate_fly_wheel_max_speed = mb9; // this might also activate the wheel in the shaft
 	
