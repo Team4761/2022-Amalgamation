@@ -75,6 +75,7 @@ public class pathWeaverInterpreter {
         Robot.m_drivetrain.resetOdometry(start);
 
         // java syntax be like:
+        // I think I'm supposed to replace tankDriveVolts with some other command...
         return ramseteCommand.andThen(()->Robot.m_drivetrain.tankDriveVolts(0,0));
     }
 

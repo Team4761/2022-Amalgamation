@@ -55,6 +55,11 @@ public class Robot extends TimedRobot
         SmartDashboard.putData("Auto choices", chooser);
 		
 		m_oi = new OI();
+
+        commandScheduler.registerSubsystem(m_intake);
+        commandScheduler.registerSubsystem(m_drivetrain);
+        commandScheduler.registerSubsystem(m_climber);
+        commandScheduler.registerSubsystem(m_shooter);
     }
     
     
@@ -89,41 +94,46 @@ public class Robot extends TimedRobot
     
     
     /** This method is called periodically during autonomous. */
+    private String last_cycle_autoSelected;
     @Override
     public void autonomousPeriodic()
     {
-        switch (autoSelected)
-        {
-            case AutonomousOptions.DEBUG_AUTO:
-                try {
-                    pathWeaverInterpreter.loadTrajectory(AutonomousOptions.DEBUG_AUTO_PATH);
-                } catch (IOException e) {
-                    DriverStation.reportError("Unable to Load the debug trajectory",true);
-                    e.printStackTrace();
-                }
-                pathWeaverInterpreter.autoPathWeaverCommand();
-                break;
-            case AutonomousOptions.DEFAULT_AUTO:
-                // code goes here
-                break;
-            case AutonomousOptions.EASY_POINTS_AUTO:
-                try {
-                    pathWeaverInterpreter.loadTrajectory(AutonomousOptions.EASY_POINTS_AUTO_PATH);
-                } catch (IOException e) {
-                    DriverStation.reportError("Unable to Load the debug trajectory",true);
-                    e.printStackTrace();
-                }
-                break;
-            case AutonomousOptions.FIND_BALL_ON_GROUND:
-                // raspberry pi code goes here
-                break;
-            case AutonomousOptions.SHOOT_BALL:
-                // shooter code goes here
-                break;
-            default:
-                // Put default auto code here
-                break;
+
+        if(!last_cycle_autoSelected.equals(autoSelected)) {
+            switch (autoSelected) {
+                case AutonomousOptions.DEBUG_AUTO:
+                    try {
+                        pathWeaverInterpreter.loadTrajectory(AutonomousOptions.DEBUG_AUTO_PATH);
+                    } catch (IOException e) {
+                        DriverStation.reportError("Unable to Load the debug trajectory", true);
+                        e.printStackTrace();
+                    }
+                    commandScheduler.schedule(pathWeaverInterpreter.autoPathWeaverCommand());
+                    break;
+                case AutonomousOptions.DEFAULT_AUTO:
+                    // code goes here
+                    break;
+                case AutonomousOptions.EASY_POINTS_AUTO:
+                    try {
+                        pathWeaverInterpreter.loadTrajectory(AutonomousOptions.EASY_POINTS_AUTO_PATH);
+                    } catch (IOException e) {
+                        DriverStation.reportError("Unable to Load the debug trajectory", true);
+                        e.printStackTrace();
+                    }
+                    commandScheduler.schedule(pathWeaverInterpreter.autoPathWeaverCommand());
+                    break;
+                case AutonomousOptions.FIND_BALL_ON_GROUND:
+                    // raspberry pi code goes here
+                    break;
+                case AutonomousOptions.SHOOT_BALL:
+                    // shooter code goes here
+                    break;
+                default:
+                    // Put default auto code here
+                    break;
+            }
         }
+        last_cycle_autoSelected = autoSelected;
     }
     
     
