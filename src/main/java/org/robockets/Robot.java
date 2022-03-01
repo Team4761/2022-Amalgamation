@@ -106,6 +106,14 @@ public class Robot extends TimedRobot
             case AutonomousOptions.DEFAULT_AUTO:
                 // code goes here
                 break;
+            case AutonomousOptions.EASY_POINTS_AUTO:
+                try {
+                    pathWeaverInterpreter.loadTrajectory(AutonomousOptions.EASY_POINTS_AUTO_PATH);
+                } catch (IOException e) {
+                    DriverStation.reportError("Unable to Load the debug trajectory",true);
+                    e.printStackTrace();
+                }
+                break;
             case AutonomousOptions.FIND_BALL_ON_GROUND:
                 // raspberry pi code goes here
                 break;
