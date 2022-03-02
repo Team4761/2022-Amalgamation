@@ -152,6 +152,9 @@ public class Robot extends TimedRobot
 
         // update hood adjuster PID
         Varyings.hoodAdjusterpid = (PIDController) SmartDashboard.getData("Hood Adjuster PID");
+        RobotMap.c_hood_adjust.setP(Varyings.hoodAdjusterpid.getP());
+        RobotMap.c_hood_adjust.setI(Varyings.hoodAdjusterpid.getI());
+        RobotMap.c_hood_adjust.setD(Varyings.hoodAdjusterpid.getD());
 
         // update misc values
         Varyings.drivetrainMaxRotationSpeed = SmartDashboard.getNumber("Max Drivetrain Rotational Speed",1.0);

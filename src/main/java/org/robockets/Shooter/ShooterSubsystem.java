@@ -1,6 +1,7 @@
 package org.robockets.Shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.robockets.*;
@@ -76,8 +77,14 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void AdjustHoodExact(double degrees) {
-        double encoder_value = (degrees / 360.0) * PIDConstants.TICKS_PER_REV / GearRatios.hoodAdjuster;
+        //double encoder_value = (degrees / 360.0) * PIDConstants.TICKS_PER_REV / GearRatios.hoodAdjuster;
         // by default it's degrees, so that's perfect for us
-        RobotMap.c_hood_adjust.setPosition(degrees);
-    }// hi gain
+        double rotations = degrees / 360.0;
+        RobotMap.c_hood_adjust.setReference(rotations, CANSparkMax.ControlType.kPosition);
+    }
+
+    public void AdjustHoodExactRadians(double rad) {
+        double rotations = rad / (2.0 * Math.PI);
+        RobotMap.c_hood_adjust.setReference(rotations, CANSparkMax.ControlType.kPosition);
+    }
 }
