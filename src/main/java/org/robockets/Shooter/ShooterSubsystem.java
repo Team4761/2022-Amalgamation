@@ -69,4 +69,11 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
     }
+    
+    // Input is position changed over 100 milliseconds
+    public void shootExact(double rpm) {
+        double encoder_value_change_over_100_millis = (rpm * PIDConstants.TICKS_PER_REV) / 600.0;
+        RobotMap.ShooterLeft.set(ControlMode.Velocity,encoder_value_change_over_100_millis);
+        RobotMap.ShooterRight.set(ControlMode.Velocity,-encoder_value_change_over_100_millis);
+    }
 }
