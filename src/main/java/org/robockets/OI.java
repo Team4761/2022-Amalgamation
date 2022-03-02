@@ -104,23 +104,22 @@ public class OI {
 	public static final JoystickButton intake_pneumatic = x;
 
     // These two are written up!
-	public static final JoystickButton hood_raise = mb9;
-	public static final JoystickButton hood_lower = ab2;
+	public static final JoystickButton hood_raise = new JoystickButton(xbox, 5); //left trigger button
+	public static final JoystickButton hood_lower = new JoystickButton(xbox, 6); //right trigger button
 
     // These are written up!
     public static final JoystickButton move_climber = a;
 
     // This is written up!
 	public static final JoystickButton activate_fly_wheel_max_speed = b; // this might also activate the wheel in the shaft
-	public static final JoystickButton activate_inner_wheel = mb12;
+	public static final JoystickButton activate_inner_wheel = b;
 
 	public static final JoystickButton auto1 = ab5;
 	public static final JoystickButton auto2 = ab12;
 
 	// If pressing a button runs a command, add that here!
     public OI(){
-        //a.whenPressed(new ExtendArmCommand());
-        //b.whenPressed(new RetractArmCommand());
+        // do nothing lololololol
     }
 
 }

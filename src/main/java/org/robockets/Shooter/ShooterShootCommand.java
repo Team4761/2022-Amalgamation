@@ -56,16 +56,16 @@ public class ShooterShootCommand extends CommandBase {
         boolean testing = false; //TODO so the buttons don't work the way the code had og and i don't have a way to do this without making 3 commands so for now its just for variable distance
         if(testing){
           //?  RobotMap.robotShoot.Shoot(Lspeed * frictionMakeup);
-            Robot.m_shooter.Shoot(Lrpm * frictionMakeup);
+            Robot.m_shooter.shootExact(Lrpm * frictionMakeup);
         } else if (testing){
           //?  RobotMap.robotShoot.Shoot(Hspeed * frictionMakeup);
-            Robot.m_shooter.Shoot(Hrpm * frictionMakeup);
+            Robot.m_shooter.shootExact(Hrpm * frictionMakeup);
         } else if(testing == false){
           //?  RobotMap.robotShoot.Shoot(rpm * frictionMakeup);
-            Robot.m_shooter.Shoot(rpm * frictionMakeup);
+            Robot.m_shooter.shootExact(rpm * frictionMakeup);
         } else {
           //?  RobotMap.robotShoot.Shoot(0);
-            Robot.m_shooter.Shoot(0);
+            Robot.m_shooter.shootExact(0);
         }
     }
 

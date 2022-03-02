@@ -3,17 +3,14 @@ package org.robockets.Shooter;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import org.robockets.GearRatios;
-import org.robockets.OI;
-import org.robockets.Robot;
-import org.robockets.RobotMap;
-import org.robockets.Varyings;
+import org.robockets.*;
 
 public class ShooterSubsystem extends SubsystemBase {
 
     public void Shoot(double power){
-        RobotMap.ShooterLeft.set(ControlMode.Velocity, power/GearRatios.shooter);
-        RobotMap.ShooterRight.set(ControlMode.Velocity, power/GearRatios.shooter);
+      //artifact from eddie idk if this was supposed to work or not  RobotMap.robotShoot.setReferenceRPM(power);
+        RobotMap.ShooterLeft.set(ControlMode.Velocity, power);
+        RobotMap.ShooterRight.set(ControlMode.Velocity, power);
     }
 
     // With eager singleton initialization, any static variables/fields used in the 
@@ -57,7 +54,7 @@ public class ShooterSubsystem extends SubsystemBase {
             RobotMap.ShooterLeft.set(-speed);
             RobotMap.ShooterRight.set(speed);
         }
-            //RobotMap.robotShoot.set(speed); // This way if another command is running the shooter, we don't brute force set it to 0
+        //RobotMap.robotShoot.set(speed); // This way if another command is running the shooter, we don't brute force set it to 0
 
         double insidewheelspeed = OI.activate_inner_wheel.get() ? 0.5 : 0.0;
         RobotMap.inside_wheel.set(insidewheelspeed);
@@ -69,11 +66,16 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
     }
-    
+
     // Input is position changed over 100 milliseconds
     public void shootExact(double rpm) {
         double encoder_value_change_over_100_millis = (rpm * PIDConstants.TICKS_PER_REV) / 600.0;
-        RobotMap.ShooterLeft.set(ControlMode.Velocity,encoder_value_change_over_100_millis);
-        RobotMap.ShooterRight.set(ControlMode.Velocity,-encoder_value_change_over_100_millis);
+        RobotMap.ShooterLeft.set(ControlMode.Velocity,encoder_value_change_over_100_millis / GearRatios.shooter);
+        RobotMap.ShooterRight.set(ControlMode.Velocity,-encoder_value_change_over_100_millis / GearRatios.shooter);
+    }
+
+    public void AdjustHood(double degrees) {
+        double encoder_value = (degrees / 360.0) * PIDConstants.TICKS_PER_REV / GearRatios.hoodAdjuster;
+        //RobotMap.hood_adjust.
     }
 }

@@ -3,7 +3,6 @@ package org.robockets.ClimbingCommands;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import org.robotics.GearRatios;
 import org.robockets.OI;
 import org.robockets.RobotMap;
 
@@ -58,7 +57,7 @@ public class ClimberSubsystem extends SubsystemBase {
         DoubleSolenoid.Value v = stat ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;
         RobotMap.ClimberSolenoids.set(v);
 
-        double ClimberSpeed = OI.xbox.getRawAxis(5);
+        double ClimberSpeed = OI.xbox.getRawAxis(5); // up down on right stick
         RobotMap.leftArmExtendMotor.set(ClimberSpeed);
         RobotMap.rightArmExtendMotor.set(-ClimberSpeed);
         //RobotMap.ArmExtendMotor.set(ClimberSpeed);
