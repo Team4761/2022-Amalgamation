@@ -43,7 +43,7 @@ public class RobotMap {
 
     // Intake
     public static CANSparkMax back_intake = new CANSparkMax(9, CANSparkMaxLowLevel.MotorType.kBrushless);
-    public static CANSparkMax front_intake = new CANSparkMax(10, CANSparkMaxLowLevel.MotorType.kBrushless);
+    //public static CANSparkMax front_intake = new CANSparkMax(10, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     // 2 is push out, 3 is in
     public static DoubleSolenoid intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,2,3);
@@ -72,6 +72,7 @@ public class RobotMap {
 	public static CANCoder c_hood_adjust = new CANCoder(11);
 	
 	public static CANSparkMax inside_wheel = new CANSparkMax(12, CANSparkMaxLowLevel.MotorType.kBrushless); // This can just run on it's own to be honest
+    public static CANSparkMax inside_wheel2 = new CANSparkMax(10, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     public static MotorControllerGroup robotShoot = new MotorControllerGroup(ShooterLeft, ShooterRight);
 
