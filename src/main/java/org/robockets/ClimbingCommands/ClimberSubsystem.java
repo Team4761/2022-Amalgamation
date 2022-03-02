@@ -59,8 +59,8 @@ public class ClimberSubsystem extends SubsystemBase {
         RobotMap.ClimberSolenoids.set(v);
 
         double ClimberSpeed = OI.xbox.getRawAxis(5);
-        RobotMap.leftArmExtendMotor.set(ClimberSpeed/GearRatios.climber);
-        RobotMap.rightArmExtendMotor.set(-ClimberSpeed/GearRatios.climber);
+        RobotMap.leftArmExtendMotor.set(ClimberSpeed);
+        RobotMap.rightArmExtendMotor.set(-ClimberSpeed);
         //RobotMap.ArmExtendMotor.set(ClimberSpeed);
 
         last_cycle_button = move_climber.get();
