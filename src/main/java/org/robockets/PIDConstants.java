@@ -13,7 +13,7 @@ public class PIDConstants {
     public static final double MAX_NEO_RPM = 1000;
     public static final double MAX_FALCON_RPM = 1000;
 
-    public static final double robot_mass_kg = 60.0;
+    public static final double robot_mass_kg = 59.42;
 
     public static double METERS_TO_REVS(double meters) {
         double circumference = Math.PI * 2.0 * r_wheel_meters;
