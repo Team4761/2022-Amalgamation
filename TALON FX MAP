@@ -1,0 +1,21 @@
+import com.ctre.phoenix.motorcontrol.GroupMotorControllers;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX; //Falcon 500 class
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
+public class PhoenixMotor {
+
+    public static WPI_TalonFX frontleft = new WPI_TalonFX(0);
+    public static WPI_TalonFX frontright = new WPI_TalonFX(1);
+    public static WPI_TalonFX backleft = new WPI_TalonFX(2);
+    public static WPI_TalonFX backright = new WPI_TalonFX(3);
+    public static Joystick controller= new Joystick(0);
+    public static JoystickButton A = new JoystickButton(controller, 0);
+    public static GroupMotorControllers LeftFront = new GroupMotorControllers();
+    public static SpeedControllerGroup left = new SpeedControllerGroup(frontleft, backleft);
+    public static SpeedControllerGroup right = new SpeedControllerGroup(frontright, backright);
+    public static DifferentialDrive robotdrive = new DifferentialDrive(left, right);
+    public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
