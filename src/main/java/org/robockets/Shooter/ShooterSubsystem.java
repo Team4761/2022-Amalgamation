@@ -3,6 +3,7 @@ package org.robockets.Shooter;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.robockets.GearRatios;
 import org.robockets.OI;
 import org.robockets.Robot;
 import org.robockets.RobotMap;
@@ -11,7 +12,6 @@ import org.robockets.Varyings;
 public class ShooterSubsystem extends SubsystemBase {
 
     public void Shoot(double power){
-      //artifact from eddie idk if this was supposed to work or not  RobotMap.robotShoot.setReferenceRPM(power);
         RobotMap.ShooterLeft.set(ControlMode.Velocity, power/GearRatios.shooter);
         RobotMap.ShooterRight.set(ControlMode.Velocity, power/GearRatios.shooter);
     }
