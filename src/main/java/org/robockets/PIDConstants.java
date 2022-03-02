@@ -9,9 +9,9 @@ public class PIDConstants {
     public static final double r_wheel_meters = 0.0508;
     public static final double width_meters = 0.63;
 
-    //max rpm TODO: Find this!
-    public static final double MAX_NEO_RPM = 1000;
-    public static final double MAX_FALCON_RPM = 1000;
+    //max rpm
+    public static final double MAX_NEO_RPM = 5676;
+    public static final double MAX_FALCON_RPM = 6380;
 
     public static final double robot_mass_kg = 59.42;
 
