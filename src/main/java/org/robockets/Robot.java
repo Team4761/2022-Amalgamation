@@ -5,12 +5,10 @@
 
 package org.robockets;
 
-import com.ctre.phoenix.sensors.CANCoderConfiguration;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -21,7 +19,6 @@ import org.robockets.Intake.IntakeSubsystem;
 import org.robockets.Shooter.ShooterSubsystem;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -88,6 +85,7 @@ public class Robot extends TimedRobot
     public void applyToShuffleboard() {
         SmartDashboard.putData("Drivetrain PID", Varyings.drivetrainpid);
         SmartDashboard.putData("Shooter PID", Varyings.shooterpid);
+        SmartDashboard.putData("Hood Adjuster PID", Varyings.hoodAdjusterpid);
         SmartDashboard.putNumber("Max Drivetrain Speed", Varyings.drivetrainMaxSpeed);
         SmartDashboard.putNumber("Max Drivetrain Rotational Speed", Varyings.drivetrainMaxRotationSpeed);
         SmartDashboard.putNumber("Max Hood Adjuster Speed",Varyings.hoodAdjusterMaxSpeed);
@@ -151,6 +149,9 @@ public class Robot extends TimedRobot
         RobotMap.ShooterRight.config_kP(0,Varyings.shooterpid.getP());
         RobotMap.ShooterRight.config_kI(0,Varyings.shooterpid.getI());
         RobotMap.ShooterRight.config_kD(0,Varyings.shooterpid.getD());
+
+        // update hood adjuster PID
+        Varyings.hoodAdjusterpid = (PIDController) SmartDashboard.getData("Hood Adjuster PID");
 
         // update misc values
         Varyings.drivetrainMaxRotationSpeed = SmartDashboard.getNumber("Max Drivetrain Rotational Speed",1.0);

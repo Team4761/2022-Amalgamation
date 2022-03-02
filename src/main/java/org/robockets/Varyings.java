@@ -11,8 +11,10 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
  */
 public class Varyings {
 
+    // FUN FACT: These PID controllers aren't actually used, we just want the 3 numbers
     public static PIDController drivetrainpid = new PIDController(0.6,0,0.3);
     public static PIDController shooterpid = new PIDController(0.6,0,0.3);
+    public static PIDController hoodAdjusterpid = new PIDController(0.7,0,0.5);
 
     public static Field2d m_field = new Field2d();
 
