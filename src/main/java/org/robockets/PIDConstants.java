@@ -6,18 +6,14 @@ import com.ctre.phoenix.sensors.CANCoder;
 // me when #define doesn't exist in java :(
 public class PIDConstants {
 
-    public static final double kp = 0.0;
-    public static final double ki = 0.0;
-    public static final double kd = 0.0;
+    public static final double r_wheel_meters = 0.0508;
+    public static final double width_meters = 0.63;
 
-    public static final double r_wheel_meters = 0.05;
-    public static final double width_meters = 0.6;
+    //max rpm TODO: Find this!
+    public static final double MAX_NEO_RPM = 1000;
+    public static final double MAX_FALCON_RPM = 1000;
 
-    public static WPI_TalonFX debug;
-    public static CANCoder c_debug;
-
-    //Gear Ratios
-    public static final double drivetrain_gear_ratio = 1.0;
+    public static final double robot_mass_kg = 60.0;
 
     public static double METERS_TO_REVS(double meters) {
         double circumference = Math.PI * 2.0 * r_wheel_meters;
@@ -26,7 +22,7 @@ public class PIDConstants {
 
     public static double METERS_TO_ROTATIONS(double meters) {
         double circumference = Math.PI * 2.0 * r_wheel_meters;
-        return (meters / circumference)*drivetrain_gear_ratio;
+        return (meters / circumference)*GearRatios.drivetrain;
     }
 
     // These are numbers that were obtained using the robot characterization toolsuite

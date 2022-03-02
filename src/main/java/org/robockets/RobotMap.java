@@ -59,7 +59,7 @@ public class RobotMap {
 
     public static MotorControllerGroup ArmExtendMotor = new MotorControllerGroup(leftArmExtendMotor,rightArmExtendMotor);
     // 0 is angle down, 1 is angle up
-    public static DoubleSolenoid ClimberSolenoids = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+    public static DoubleSolenoid ClimberSolenoids = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 4, 5);
 
     /**
      * Eddies Code that HE finally Uploaded!!

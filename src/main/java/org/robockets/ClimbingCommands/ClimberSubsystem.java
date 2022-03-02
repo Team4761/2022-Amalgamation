@@ -9,9 +9,6 @@ import org.robockets.RobotMap;
 import static org.robockets.OI.move_climber;
 
 public class ClimberSubsystem extends SubsystemBase {
-
-    private boolean stat = false;
-
     // With eager singleton initialization, any static variables/fields used in the 
     // constructor must appear before the "INSTANCE" variable so that they are initialized 
     // before the constructor is called when the "INSTANCE" variable initializes.
@@ -47,22 +44,22 @@ public class ClimberSubsystem extends SubsystemBase {
 
     }
 
-    private boolean last_cycle_button;
+    private boolean stat = false;
+    private boolean last_cycle_button = false;
     @Override
     public void periodic() {
-        //move_climber_out.whenPressed(new ForwardArmCommand());
-        //move_climber_in.whenPressed(new BackwardArmCommand());
 
-        //DoubleSolenoid.Value v = move_climber_in.get() ? DoubleSolenoid.Value.kForward : (move_climber_out.get() ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kOff);
-        if(move_climber.get() != last_cycle_button)
+        //Toggle between
+        //
+        if(move_climber.get() != last_cycle_button && move_climber.get())
             stat = !stat;
 
         DoubleSolenoid.Value v = stat ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;
         RobotMap.ClimberSolenoids.set(v);
 
         double ClimberSpeed = OI.xbox.getRawAxis(5);
-        RobotMap.leftArmExtendMotor.set(-ClimberSpeed);
-        RobotMap.rightArmExtendMotor.set(ClimberSpeed);
+        RobotMap.leftArmExtendMotor.set(ClimberSpeed);
+        RobotMap.rightArmExtendMotor.set(-ClimberSpeed);
         //RobotMap.ArmExtendMotor.set(ClimberSpeed);
 
         last_cycle_button = move_climber.get();

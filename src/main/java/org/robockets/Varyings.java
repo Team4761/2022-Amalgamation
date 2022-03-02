@@ -10,8 +10,8 @@ import edu.wpi.first.math.controller.PIDController;
  */
 public class Varyings {
 
-    public static PIDController drivetrainpid = new PIDController(0,0,0);
-    public static PIDController shooterpid = new PIDController(0,0,0);
+    public static PIDController drivetrainpid = new PIDController(0.6,0,0.3);
+    public static PIDController shooterpid = new PIDController(0.6,0,0.3);
 
     public static double flywheelMaxSpeed = 1.0;
     public static double drivetrainMaxSpeed = 1.0;

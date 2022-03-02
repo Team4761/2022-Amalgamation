@@ -8,10 +8,10 @@ public class OI {
 
     public static Joystick xbox = new Joystick(0);
 
-    public static JoystickButton a = new JoystickButton(xbox, 0);
-    public static JoystickButton b = new JoystickButton(xbox, 1);
-    public static JoystickButton x = new JoystickButton(xbox, 2);
-    public static JoystickButton y = new JoystickButton(xbox, 3);
+    public static JoystickButton a = new JoystickButton(xbox, 1);
+    public static JoystickButton b = new JoystickButton(xbox, 2);
+    public static JoystickButton x = new JoystickButton(xbox, 3);
+    public static JoystickButton y = new JoystickButton(xbox, 4);
 
     //<Button Board goes here>
     //Side with switch and green button is left side
@@ -99,20 +99,19 @@ public class OI {
 	// Here we'll assign which is which later, this makes it easier to look at a button and go "wait, what does this button do?"
 
     // These three are written up!
-	public static final JoystickButton back_intake_wheel = mb4;
-    public static final JoystickButton front_intake_wheel = mb6;
-	public static final JoystickButton intake_pneumatic = mb2;
+	public static final JoystickButton back_intake_wheel = y;
+    public static final JoystickButton front_intake_wheel = y;
+	public static final JoystickButton intake_pneumatic = x;
 
     // These two are written up!
 	public static final JoystickButton hood_raise = mb9;
 	public static final JoystickButton hood_lower = ab2;
 
     // These are written up!
-    public static final JoystickButton move_climber_not_used = mb31;
-    public static final JoystickButton move_climber = mb30;
+    public static final JoystickButton move_climber = a;
 
     // This is written up!
-	public static final JoystickButton activate_fly_wheel_max_speed = mb10; // this might also activate the wheel in the shaft
+	public static final JoystickButton activate_fly_wheel_max_speed = b; // this might also activate the wheel in the shaft
 	public static final JoystickButton activate_inner_wheel = mb12;
 
 	public static final JoystickButton auto1 = ab5;

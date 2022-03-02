@@ -6,15 +6,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.robockets.OI;
 import org.robockets.RobotMap;
 
+import static org.robockets.OI.intake_pneumatic;
+import static org.robockets.OI.move_climber;
+
 public class IntakeSubsystem extends SubsystemBase {
 
     // With eager singleton initialization, any static variables/fields used in the 
     // constructor must appear before the "INSTANCE" variable so that they are initialized 
     // before the constructor is called when the "INSTANCE" variable initializes.
-
-    private final boolean OUT = false;
-    private final boolean IN = true;
-    private boolean stat = IN;
 
     /**
      * The Singleton instance of this IntakeSubsystem. Code should use
@@ -45,6 +44,8 @@ public class IntakeSubsystem extends SubsystemBase {
         //       such as SpeedControllers, Encoders, DigitalInputs, etc.
     }
 
+    private boolean stat = false;
+    private boolean last_cycle_button = false;
     @Override
     public void periodic() {
         // this is the right trigger
@@ -59,11 +60,16 @@ public class IntakeSubsystem extends SubsystemBase {
         if(OI.front_intake_wheel.get()) RobotMap.front_intake.set(-1.0);
 
         //Toggle between Intake being pushed out or pulled
+        if(intake_pneumatic.get() != last_cycle_button && intake_pneumatic.get())
+            stat = !stat;
+
         DoubleSolenoid.Value v = stat ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;
         RobotMap.intakeSolenoid.set(v);
 
         //if a button is pressed, change stat
-        stat = OI.intake_pneumatic.get();
+        //stat = OI.intake_pneumatic.get();
+
+        last_cycle_button = intake_pneumatic.get();
     }
 
 }

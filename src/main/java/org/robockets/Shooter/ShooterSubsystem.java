@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.robockets.OI;
 import org.robockets.Robot;
 import org.robockets.RobotMap;
+import org.robockets.Varyings;
 
 public class ShooterSubsystem extends SubsystemBase {
 
@@ -51,8 +52,7 @@ public class ShooterSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         // set motor speed
-        double speed = OI.activate_fly_wheel_max_speed.get() ? 0.5 : 0.0;
-        System.out.println(speed);
+        double speed = OI.activate_fly_wheel_max_speed.get() ? Varyings.flywheelMaxSpeed : 0.0;
         if(!DriverStation.isAutonomous()) {
             RobotMap.ShooterLeft.set(-speed);
             RobotMap.ShooterRight.set(speed);

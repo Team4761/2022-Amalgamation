@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.robockets.GearRatios;
 import org.robockets.OI;
 import org.robockets.RobotMap;
+import org.robockets.Varyings;
 //import edu.wpi.first.wpilibj2.examples.ramsetecommand.Constants.DriveConstants; //<-- I need this!
 
 public class DrivetrainSubsystem extends SubsystemBase {
@@ -74,7 +75,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
             double rot = OI.xbox.getRawAxis(0);
             double trans = OI.xbox.getRawAxis(1);
 
-            RobotMap.m_drive.arcadeDrive(trans,-rot);
+            RobotMap.m_drive.arcadeDrive(trans * Varyings.drivetrainMaxSpeed,-rot * Varyings.drivetrainMaxRotationSpeed);
         }
     }
 
