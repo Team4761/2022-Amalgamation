@@ -13,6 +13,9 @@ public class OI {
     public static JoystickButton x = new JoystickButton(xbox, 3);
     public static JoystickButton y = new JoystickButton(xbox, 4);
 
+    public static double lefttrigger = xbox.getRawAxis(3);
+    public static double righttrigger = xbox.getRawAxis(4);
+
     //<Button Board goes here>
     //Side with switch and green button is left side
     //Ordered starting at top out going down then next inward column
@@ -101,7 +104,7 @@ public class OI {
     // These three are written up!
 	public static final JoystickButton back_intake_wheel = y;
     public static final JoystickButton front_intake_wheel = y;
-	public static final JoystickButton intake_pneumatic = x;
+	public static final JoystickButton intake_pneumatic = b;
 
     // These two are written up!
 	public static final JoystickButton hood_raise = new JoystickButton(xbox, 5); //left trigger button

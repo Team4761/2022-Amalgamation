@@ -48,7 +48,7 @@ public class IntakeSubsystem extends SubsystemBase {
     private boolean last_cycle_button = false;
     @Override
     public void periodic() {
-        double speed = OI.xbox.getRawAxis(3); // right trigger
+        double speed = OI.lefttrigger;
 		
         // This way, setting the speed will make both intakes pull in, or both intakes shoot out
         RobotMap.back_intake.set(-speed);
