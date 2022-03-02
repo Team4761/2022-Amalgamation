@@ -16,5 +16,6 @@ public class Varyings {
     public static double flywheelMaxSpeed = 1.0;
     public static double drivetrainMaxSpeed = 1.0;
     public static double drivetrainMaxRotationSpeed = 1.0;
+    public static double hoodAdjusterMaxSpeed = 0.1;
 
 }

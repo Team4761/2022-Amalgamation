@@ -85,6 +85,7 @@ public class Robot extends TimedRobot
         SmartDashboard.putData("Shooter PID", Varyings.shooterpid);
         SmartDashboard.putNumber("Max Drivetrain Speed", Varyings.drivetrainMaxSpeed);
         SmartDashboard.putNumber("Max Drivetrain Rotational Speed", Varyings.drivetrainMaxRotationSpeed);
+        SmartDashboard.putNumber("Max Hood Adjuster Speed",Varyings.hoodAdjusterMaxSpeed);
     }
     
     /**
@@ -136,6 +137,11 @@ public class Robot extends TimedRobot
         RobotMap.ShooterRight.config_kP(0,Varyings.shooterpid.getP());
         RobotMap.ShooterRight.config_kI(0,Varyings.shooterpid.getI());
         RobotMap.ShooterRight.config_kD(0,Varyings.shooterpid.getD());
+
+        // update misc values
+        Varyings.drivetrainMaxRotationSpeed = SmartDashboard.getNumber("Max Drivetrain Rotational Speed",1.0);
+        Varyings.drivetrainMaxSpeed = SmartDashboard.getNumber("Max Drivetrain Speed",1.0);
+        Varyings.hoodAdjusterMaxSpeed = SmartDashboard.getNumber("Max Hood Adjuster Speed",0.1);
     }
     
     /**

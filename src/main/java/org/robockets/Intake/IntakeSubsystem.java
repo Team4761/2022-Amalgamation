@@ -52,12 +52,7 @@ public class IntakeSubsystem extends SubsystemBase {
 		
         // This way, setting the speed will make both intakes pull in, or both intakes shoot out
         RobotMap.back_intake.set(-speed);
-        RobotMap.front_intake.set(-speed);
-
-        //We can also control the speed of the intake wheels using the OI buttons
-        //if(OI.back_intake_wheel.get()) RobotMap.back_intake.set(-1.0);
-        //if(OI.front_intake_wheel.get()) RobotMap.front_intake.set(-1.0);
-        //if(OI.front_intake_wheel.get()) System.out.println("Lets go!");
+        RobotMap.inside_wheel2.set(-speed);
 
         //Toggle between Intake being pushed out or pulled
         if(intake_pneumatic.get() != last_cycle_button && intake_pneumatic.get())

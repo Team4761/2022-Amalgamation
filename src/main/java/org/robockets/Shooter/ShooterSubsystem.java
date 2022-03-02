@@ -61,7 +61,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
         // adjust shooter
         double hoodShooterSpeed = OI.hood_raise.get() ? 1.0 : (OI.hood_lower.get() ? -1.0 : 0.0);
-        hoodShooterSpeed *= 0.1;
+        hoodShooterSpeed *= Varyings.hoodAdjusterMaxSpeed;
         RobotMap.hood_adjust.set(hoodShooterSpeed);
 
 
@@ -74,8 +74,9 @@ public class ShooterSubsystem extends SubsystemBase {
         RobotMap.ShooterRight.set(ControlMode.Velocity,-encoder_value_change_over_100_millis / GearRatios.shooter);
     }
 
-    public void AdjustHood(double degrees) {
+    public void AdjustHoodExact(double degrees) {
         double encoder_value = (degrees / 360.0) * PIDConstants.TICKS_PER_REV / GearRatios.hoodAdjuster;
-        //RobotMap.hood_adjust.
-    }
+        // by default it's degrees, so that's perfect for us
+        RobotMap.c_hood_adjust.setPosition(degrees);
+    }// hi gain
 }
