@@ -56,8 +56,8 @@ public class RobotMap {
     //change motor eventually. And ports, etc. CANSparkMax. Parameters
     public static CANSparkMax leftArmExtendMotor = new CANSparkMax(5, CANSparkMaxLowLevel.MotorType.kBrushless);
     public static CANSparkMax rightArmExtendMotor = new CANSparkMax(6, CANSparkMaxLowLevel.MotorType.kBrushless);
-
     public static MotorControllerGroup ArmExtendMotor = new MotorControllerGroup(leftArmExtendMotor,rightArmExtendMotor);
+
     // 0 is angle down, 1 is angle up
     public static DoubleSolenoid ClimberSolenoids = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 4, 5);
 
@@ -67,14 +67,13 @@ public class RobotMap {
 
     public static WPI_TalonFX ShooterLeft = new WPI_TalonFX(7);
     public static WPI_TalonFX ShooterRight = new WPI_TalonFX(8);
+    public static MotorControllerGroup robotShoot = new MotorControllerGroup(ShooterLeft, ShooterRight);
 	
 	public static CANSparkMax hood_adjust = new CANSparkMax(11, CANSparkMaxLowLevel.MotorType.kBrushless);
 	public static CANCoder c_hood_adjust = new CANCoder(11);
 	
 	public static CANSparkMax inside_wheel = new CANSparkMax(12, CANSparkMaxLowLevel.MotorType.kBrushless); // This can just run on it's own to be honest
     public static CANSparkMax inside_wheel2 = new CANSparkMax(10, CANSparkMaxLowLevel.MotorType.kBrushless);
-
-    public static MotorControllerGroup robotShoot = new MotorControllerGroup(ShooterLeft, ShooterRight);
 
 
 }

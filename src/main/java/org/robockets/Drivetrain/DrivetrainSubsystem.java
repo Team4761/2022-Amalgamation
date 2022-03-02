@@ -60,6 +60,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
         double l_dist = RobotMap.c_front_left.getPosition() / GearRatios.drivetrain;
         double r_dist = RobotMap.c_front_right.getPosition() / GearRatios.drivetrain;
         RobotMap.m_odometry.update(angle,l_dist,r_dist);
+        // update field
+        Varyings.m_field.setRobotPose(RobotMap.m_odometry.getPoseMeters());
 
         // I HATE Java!
         // I wanted to add a define preprocessor here so right_flight_stick not existing wouldn't through an error, but screw me!

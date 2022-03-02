@@ -6,6 +6,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import org.robockets.Drivetrain.DrivetrainSubsystem;
+import org.robockets.GearRatios;
 import org.robockets.RobotMap;
 import org.robockets.mathstuff;
 import static org.robockets.RobotMap.*;
@@ -37,13 +38,13 @@ public class adjustToDistance extends CommandBase {
         RobotMap.c_back_right.setPosition(0.0);
 
         distanceGoal = mathstuff.getDistanceTower(ty.getDouble(0.0)) - metersToPosition(shootingDistance);
-        //sets distance goal to difference of current distance to disntace needed to shoot.
+        //sets distance goal to difference of current distance to distance needed to shoot.
     }
 
     @Override
     public void execute() {
-        distance = (c_front_right.getPosition() + c_front_left.getPosition())/2; //take avg for accuracy i guess
-        front_left.set(ControlMode.Position, distanceGoal);
+        distance = (c_front_right.getPosition()/ GearRatios.drivetrain + c_front_left.getPosition()/GearRatios.drivetrain)/2; //take avg for accuracy i guess
+        front_left.set(ControlMode.Position, distanceGoal / GearRatios.drivetrain);
         front_right.follow(front_left);
         back_left.follow(front_left);
         back_right.follow(front_left);

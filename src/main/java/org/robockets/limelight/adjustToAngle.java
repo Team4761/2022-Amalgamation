@@ -30,6 +30,7 @@ public class adjustToAngle extends CommandBase {
     }
 
     //maxVoltage * rampingFactor * ((Math.abs(xAngle) / 30)+1)
+    // This is literately just bang-bang control.
     @Override
     public void execute() {
 

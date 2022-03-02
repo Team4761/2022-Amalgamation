@@ -7,6 +7,7 @@ package org.robockets;
 
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -19,6 +20,10 @@ import org.robockets.Drivetrain.pathWeaverInterpreter;
 import org.robockets.Intake.IntakeSubsystem;
 import org.robockets.Shooter.ShooterSubsystem;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 
@@ -86,6 +91,15 @@ public class Robot extends TimedRobot
         SmartDashboard.putNumber("Max Drivetrain Speed", Varyings.drivetrainMaxSpeed);
         SmartDashboard.putNumber("Max Drivetrain Rotational Speed", Varyings.drivetrainMaxRotationSpeed);
         SmartDashboard.putNumber("Max Hood Adjuster Speed",Varyings.hoodAdjusterMaxSpeed);
+
+        // Add field odometry and add xbox and button board graphic
+        SmartDashboard.putData("Field",Varyings.m_field);
+        try {
+            BufferedImage img = ImageIO.read(new File(System.getProperty("user.dir") + "\\resources\\Xbox reference"));
+            SmartDashboard.putData("Xbox Graphic",(Sendable)img);
+        } catch(Exception e) {
+            DriverStation.reportError("Could not open Xbox graphic!",e.getStackTrace());
+        }
     }
     
     /**
