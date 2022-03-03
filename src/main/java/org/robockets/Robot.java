@@ -11,9 +11,11 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.robockets.ClimbingCommands.ClimberSubsystem;
 import org.robockets.Drivetrain.DrivetrainSubsystem;
+import org.robockets.Drivetrain.EVILAutoCommand;
 import org.robockets.Drivetrain.pathWeaverInterpreter;
 import org.robockets.Intake.IntakeSubsystem;
 import org.robockets.Shooter.ShooterSubsystem;
@@ -187,11 +189,14 @@ public class Robot extends TimedRobot
     
     /** This method is called periodically during autonomous. */
     private String last_cycle_autoSelected;
+    private CommandBase theRunningCommand;
     @Override
     public void autonomousPeriodic()
     {
-
+        // Allows for swapping between autos
         if(!last_cycle_autoSelected.equals(autoSelected)) {
+            // Top the old command
+            commandScheduler.cancel(theRunningCommand);
             switch (autoSelected) {
                 case AutonomousOptions.DEBUG_AUTO:
                     try {
@@ -200,7 +205,8 @@ public class Robot extends TimedRobot
                         DriverStation.reportError("Unable to Load the debug trajectory", true);
                         e.printStackTrace();
                     }
-                    commandScheduler.schedule(pathWeaverInterpreter.autoPathWeaverCommand());
+                    theRunningCommand = pathWeaverInterpreter.autoPathWeaverCommand();
+                    commandScheduler.schedule(theRunningCommand);
                     break;
                 case AutonomousOptions.DEFAULT_AUTO:
                     // code goes here
@@ -212,13 +218,18 @@ public class Robot extends TimedRobot
                         DriverStation.reportError("Unable to Load the debug trajectory", true);
                         e.printStackTrace();
                     }
-                    commandScheduler.schedule(pathWeaverInterpreter.autoPathWeaverCommand());
+                    theRunningCommand = pathWeaverInterpreter.autoPathWeaverCommand();
+                    commandScheduler.schedule(theRunningCommand);
                     break;
                 case AutonomousOptions.FIND_BALL_ON_GROUND:
                     // raspberry pi code goes here
                     break;
                 case AutonomousOptions.SHOOT_BALL:
                     // shooter code goes here
+                    break;
+                case AutonomousOptions.EVIL_AUTO:
+                    theRunningCommand = (new EVILAutoCommand().withTimeout(2));
+                    commandScheduler.schedule(theRunningCommand);
                     break;
                 default:
                     // Put default auto code here

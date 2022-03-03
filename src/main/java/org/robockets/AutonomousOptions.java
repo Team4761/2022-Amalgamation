@@ -10,10 +10,11 @@ public class AutonomousOptions {
 
     public static final String DEFAULT_AUTO = "Default";
     public static final String DEBUG_AUTO = "First Debug Auto";
-    public static final String EASY_POINTS_AUTO = "MOve Robot out of Spawn";
+    public static final String EASY_POINTS_AUTO = "Move Robot out of Spawn";
     public static final String FIVE_BALL = "Five Ball Auto";
     public static final String SHOOT_BALL = "Shoot Ball From Anywhere Auto";
     public static final String FIND_BALL_ON_GROUND = "Goto Ball";
+    public static final String EVIL_AUTO = "Move the Robot backwards for 2 seconds";
 
     public static final String DEFAULT_AUTO_PATH = TRAJECTORY_DIR + "\\easy path.wpilib.json";
     public static final String DEBUG_AUTO_PATH = "\\debug path.wpilib.json";
@@ -21,6 +22,7 @@ public class AutonomousOptions {
     public static final String FIVE_BALL_PATH = TRAJECTORY_DIR + "\\Main Path.wpilib.json";
     public static final String SHOOT_BALL_PATH = "";
     public static final String FIND_BALL_ON_GROUND_PATH = "";
+    public static final String EVIL_AUTO_PATH = "No path dummy!";
 
     public static void addOptions(SendableChooser<String> sender) {
         sender.setDefaultOption(DEFAULT_AUTO,DEFAULT_AUTO);
@@ -29,6 +31,7 @@ public class AutonomousOptions {
         sender.addOption(SHOOT_BALL,SHOOT_BALL);
         sender.addOption(FIND_BALL_ON_GROUND,FIND_BALL_ON_GROUND);
         sender.addOption(EASY_POINTS_AUTO,EASY_POINTS_AUTO);
+        sender.addOption(EVIL_AUTO,EVIL_AUTO);
     }
 
     public static String getSelected(SendableChooser<String> sender) {
