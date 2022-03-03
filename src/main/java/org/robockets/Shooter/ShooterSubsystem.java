@@ -69,7 +69,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     }
 
-    // Input is position changed over 100 milliseconds
+    // Output is position in encoder units changed over 100 milliseconds
     public void shootExact(double rpm) {
         double encoder_value_change_over_100_millis = (rpm * PIDConstants.TICKS_PER_REV) / 600.0; // This 600 comes from turning 1 minute into 100 milliseconds
         RobotMap.ShooterLeft.set(ControlMode.Velocity,encoder_value_change_over_100_millis * GearRatios.shooter);
