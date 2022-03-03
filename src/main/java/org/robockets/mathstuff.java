@@ -20,7 +20,7 @@ public class mathstuff {
     }
 
     public static double findVelocity(double ty){
-        double distance = getDistanceTower(ty);
+        double distance = getDistanceTower(ty) + 0.61;
         return Math.sqrt(
                 (-9.81 * distance * distance)
                         /
