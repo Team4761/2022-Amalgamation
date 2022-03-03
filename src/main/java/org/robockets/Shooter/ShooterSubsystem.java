@@ -82,7 +82,7 @@ public class ShooterSubsystem extends SubsystemBase {
      * @param mps meters per seond
      */
     public void shootExactMps(double mps) {
-        double encoder_value = (mps / PIDConstants.shooter_width_meters) * PIDConstants.TICKS_PER_REV / 10.0; // this 10 comes from turning 1 second into 100 millis
+        double encoder_value = (mps / PIDConstants.shooter_width_meters) * 2.0 * Math.PI * PIDConstants.TICKS_PER_REV / 10.0; // this 10 comes from turning 1 second into 100 millis
         RobotMap.ShooterLeft.set(ControlMode.Velocity,encoder_value * GearRatios.shooter);
         RobotMap.ShooterRight.set(ControlMode.Velocity,-encoder_value * GearRatios.shooter);
     }
