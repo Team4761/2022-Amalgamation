@@ -87,6 +87,11 @@ public class ShooterSubsystem extends SubsystemBase {
         RobotMap.ShooterRight.set(ControlMode.Velocity,-encoder_value * GearRatios.shooter);
     }
 
+    /**
+     * Adjust the hood an exact amount of degrees
+     * Reminder that CANSparkMax motors use rotations for position and rpm for velocity
+     * @param degrees Exact degrees
+     */
     public void AdjustHoodExact(double degrees) {
         //double encoder_value = (degrees / 360.0) * PIDConstants.TICKS_PER_REV / GearRatios.hoodAdjuster;
         // by default it's degrees, so that's perfect for us
@@ -94,6 +99,11 @@ public class ShooterSubsystem extends SubsystemBase {
         RobotMap.c_hood_adjust.setReference(rotations, CANSparkMax.ControlType.kPosition);
     }
 
+    /**
+     * Adjust the hood an exact amount of radians
+     * Reminder that CANSparkMax motors use rotations for position and rpm for velocity
+     * @param rad Exact radians
+     */
     public void AdjustHoodExactRadians(double rad) {
         double rotations = rad / (2.0 * Math.PI);
         RobotMap.c_hood_adjust.setReference(rotations, CANSparkMax.ControlType.kPosition);
