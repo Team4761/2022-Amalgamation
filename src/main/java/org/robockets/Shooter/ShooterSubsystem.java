@@ -53,8 +53,8 @@ public class ShooterSubsystem extends SubsystemBase {
         //double speed = OI.activate_fly_wheel_max_speed.get() ? Varyings.flywheelMaxSpeed : 0.0;
         double speed = OI.shooterValue * Varyings.flywheelMaxSpeed; // This SHOULD be the left trigger
         if(!DriverStation.isAutonomous()) {
-            RobotMap.ShooterLeft.set(-speed);
-            RobotMap.ShooterRight.set(speed);
+            RobotMap.ShooterLeft.set(speed);
+            RobotMap.ShooterRight.set(-speed);
         }
         //RobotMap.robotShoot.set(speed); // This way if another command is running the shooter, we don't brute force set it to 0
 
