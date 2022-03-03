@@ -34,6 +34,7 @@ public class Robot extends TimedRobot
 {
     private String autoSelected;
     private final SendableChooser<String> chooser = new SendableChooser<>();
+    private final SendableChooser<OI.ControllerMode> mode = new SendableChooser<>();
 
     // Command Scheduler
     private CommandScheduler commandScheduler = CommandScheduler.getInstance();
@@ -54,13 +55,12 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit()
     {
-        System.out.println("Press Y to update Smart Dashboard values!");
+        //Initialize the buttons for the first boot up
+        m_oi = new OI();
+
         // adds all the auto options to it
-        // Yes I COULD have all this in the same class, but it's nicer when it's separated
         AutonomousOptions.addOptions(chooser);
         SmartDashboard.putData("Auto choices", chooser);
-		
-		m_oi = new OI(); // never used, oh well
 
         // Reverse all the motors that are needed
         //RobotMap.leftArmExtendMotor.setInverted(true);
@@ -90,6 +90,10 @@ public class Robot extends TimedRobot
         SmartDashboard.putNumber("Max Drivetrain Rotational Speed", Varyings.drivetrainMaxRotationSpeed);
         SmartDashboard.putNumber("Max Hood Adjuster Speed",Varyings.hoodAdjusterMaxSpeed);
 
+        mode.setDefaultOption("One Xbox Controller", OI.ControllerMode.OneXbox);
+        mode.addOption("Two Xbox Controllers", OI.ControllerMode.TwoXbox);
+        mode.addOption("Xbox and Button Board", OI.ControllerMode.XboxAndButtonBoard);
+
         // Add field odometry and add xbox and button board graphic
         SmartDashboard.putData("Field",Varyings.m_field);
         try {
@@ -109,12 +113,10 @@ public class Robot extends TimedRobot
      */
     @Override
     public void robotPeriodic() {
-
-        // update this with a button or something
-        //if(OI.y.get()) {
         updateModels();
         SmartDashboard.updateValues();
-        //}
+        m_oi.periodic();
+
     }
 
     /**
@@ -160,6 +162,7 @@ public class Robot extends TimedRobot
         Varyings.drivetrainMaxRotationSpeed = SmartDashboard.getNumber("Max Drivetrain Rotational Speed",1.0);
         Varyings.drivetrainMaxSpeed = SmartDashboard.getNumber("Max Drivetrain Speed",1.0);
         Varyings.hoodAdjusterMaxSpeed = SmartDashboard.getNumber("Max Hood Adjuster Speed",0.1);
+        OI.selectedMode = mode.getSelected(); // one of these things is not like the other
     }
     
     /**

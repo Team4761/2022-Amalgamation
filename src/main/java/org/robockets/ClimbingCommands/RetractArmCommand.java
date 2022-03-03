@@ -24,8 +24,8 @@ public class RetractArmCommand extends CommandBase {
         //Motors in reverse direction. Motors connected to winch (andymark climber in a box)
    //     RobotMap.rightArmExtendMotor.set(-0.6);  //test values
    //     RobotMap.leftArmExtendMotor.set(-0.6);
-        RobotMap.rightArmExtendMotor.set(-OI.xbox.getRawAxis(2));
-        RobotMap.leftArmExtendMotor.set(-OI.xbox.getRawAxis(2));
+        RobotMap.rightArmExtendMotor.set(-OI.driverController.getRawAxis(2));
+        RobotMap.leftArmExtendMotor.set(-OI.driverController.getRawAxis(2));
     }
 
     @Override

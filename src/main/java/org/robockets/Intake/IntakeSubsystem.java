@@ -7,7 +7,6 @@ import org.robockets.OI;
 import org.robockets.RobotMap;
 
 import static org.robockets.OI.intake_pneumatic;
-import static org.robockets.OI.move_climber;
 
 public class IntakeSubsystem extends SubsystemBase {
 
@@ -48,7 +47,7 @@ public class IntakeSubsystem extends SubsystemBase {
     private boolean last_cycle_button = false;
     @Override
     public void periodic() {
-        double speed = OI.lefttrigger;
+        double speed = OI.intakeValue;
 		
         // This way, setting the speed will make both intakes pull in, or both intakes shoot out
         RobotMap.back_intake.set(-speed);

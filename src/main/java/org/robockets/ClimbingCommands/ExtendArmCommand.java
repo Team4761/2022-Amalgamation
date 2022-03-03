@@ -23,8 +23,8 @@ public class ExtendArmCommand extends CommandBase {
     public void execute() {
        // RobotMap.leftArmExtendMotor.set(0.6); //test speed
        // RobotMap.rightArmExtendMotor.set(0.6);
-        RobotMap.rightArmExtendMotor.set(OI.xbox.getRawAxis(2));
-        RobotMap.leftArmExtendMotor.set(OI.xbox.getRawAxis(2));
+        RobotMap.rightArmExtendMotor.set(OI.driverController.getRawAxis(2));
+        RobotMap.leftArmExtendMotor.set(OI.driverController.getRawAxis(2));
         System.out.println("Testing Working");
     }
 
