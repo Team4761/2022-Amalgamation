@@ -179,7 +179,8 @@ public class OI {
                 hood_lower = new JoystickButton(secondaryController, 6); //right trigger button
                 intake_pneumatic = sc_b;
                 move_climber = sc_a;
-                activate_fly_wheel_max_speed = sc_y;
+                //activate_fly_wheel_max_speed = sc_y;
+                activate_inner_wheel = sc_y;
                 break;
             case XboxAndButtonBoard:
                 constructButtonBoard();
