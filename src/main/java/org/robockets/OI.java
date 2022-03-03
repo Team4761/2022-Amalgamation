@@ -153,8 +153,8 @@ public class OI {
     public static double intakeValue;
     public static double shooterValue;
 
-    public static JoystickButton auto1 = ab5;
-    public static JoystickButton auto2 = ab12;
+    public static JoystickButton auto1;
+    public static JoystickButton auto2;
 
     public OI() {
         changeDriveMode();
