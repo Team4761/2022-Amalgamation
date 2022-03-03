@@ -1,9 +1,18 @@
-# 2022-Amalgamation
-An amalgamation of everyone's code. To be turned into one project!
+# 2022 Robockets Master
 
-This is the current Master Code file
+## Rapid React Programming
 
-As of right now the code builds correctly although there are some things to tweak as testing moves foward,
-espeicially with the shooter stuff but we can't really figure it out until testing is moving foward.
+I give you, the labor of 5 different programmers!
+There are quite some features in this build that did not exist previously
 
-The vendordeps have two JSON files needed for compilation, the rest is just the src files not the whole project.
+## Features
+- Modify the Operator Interface on Shuffleboard! Choose between 2 controllers, 1 controller, and button board
+- A limelight that actually works!
+- All motors have ramp up to them, which keeps the robot from jittering
+
+## Socials
+- [Youtube](https://www.youtube.com/channel/UCpJoC3lpNenlDm0SHwH48Eg)
+- [Twitter](https://twitter.com/frc4761?lang=en)
+- [Facebook](https://www.facebook.com/FrcTeam4761/)
+- [Instagram](https://www.instagram.com/robockets.4761/?hl=en)
+- [BlueAlliance](https://www.thebluealliance.com/team/4761/2021)
