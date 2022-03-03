@@ -37,7 +37,8 @@ public class adjustToDistance extends CommandBase {
         RobotMap.c_back_left.setPosition(0.0);
         RobotMap.c_back_right.setPosition(0.0);
 
-        distanceGoal = mathstuff.getDistanceTower(ty.getDouble(0.0)) - metersToPosition(shootingDistance);
+        distanceGoal = mathstuff.getDistanceTower(ty.getDouble(0.0)) - metersToPosition(shootingDistance) + metersToPosition(0.61);
+        //The 0.61 makes the intercept calculated in the middle of the target
         //sets distance goal to difference of current distance to distance needed to shoot.
     }
 
