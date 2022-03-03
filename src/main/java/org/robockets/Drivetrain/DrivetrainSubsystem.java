@@ -57,8 +57,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
         Rotation2d angle = RobotMap.gyro.getRotation2d();
         //double l_dist = RobotMap.front_left.getSelectedSensorPosition();
         //double r_dist = RobotMap.front_right.getSelectedSensorPosition();
-        double l_dist = RobotMap.c_front_left.getPosition() / GearRatios.drivetrain;
-        double r_dist = RobotMap.c_front_right.getPosition() / GearRatios.drivetrain;
+        double l_dist = RobotMap.c_front_left.getPosition() * GearRatios.drivetrain;
+        double r_dist = RobotMap.c_front_right.getPosition() * GearRatios.drivetrain;
         RobotMap.m_odometry.update(angle,l_dist,r_dist);
         // update field
         Varyings.m_field.setRobotPose(RobotMap.m_odometry.getPoseMeters());

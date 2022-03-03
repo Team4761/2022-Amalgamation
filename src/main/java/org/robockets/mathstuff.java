@@ -30,7 +30,7 @@ public class mathstuff {
 
     public static double metersToPosition(double meters) {
         double circumference = Math.PI * 2.0 * r_wheel_meters;
-        return (meters / circumference) * gearRatio;
+        return (meters / circumference) * GearRatios.drivetrain;
     }
 
 

@@ -37,16 +37,10 @@ public class adjustToAngle extends CommandBase {
         xAngle = tx.getDouble(0.0);
 
         if (xAngle > 1) {
-            RobotMap.front_left.set(0.2);
-            RobotMap.front_right.set(-0.2);
-            RobotMap.back_left.set(0.2);
-            RobotMap.back_right.set(-0.2);
+            RobotMap.m_drive.tankDrive(0.2, -0.2);
 
         } else if (xAngle < -1) {
-            RobotMap.front_left.set(-0.2);
-            RobotMap.front_right.set(0.2);
-            RobotMap.back_left.set(-0.2);
-            RobotMap.back_right.set(0.2);
+            RobotMap.m_drive.tankDrive(-0.2, 0.2);
         }
         //TODO make sure robot actaully goes in right direction mess with the - signs.
         SmartDashboard.putNumber("tx", tx.getDouble(0.0));
@@ -61,8 +55,6 @@ public class adjustToAngle extends CommandBase {
         } else {
             return false;
         }
-
-
     }
 
     @Override

@@ -43,8 +43,8 @@ public class adjustToDistance extends CommandBase {
 
     @Override
     public void execute() {
-        distance = (c_front_right.getPosition()/ GearRatios.drivetrain + c_front_left.getPosition()/GearRatios.drivetrain)/2; //take avg for accuracy i guess
-        front_left.set(ControlMode.Position, distanceGoal / GearRatios.drivetrain);
+        distance = (c_front_right.getPosition() * GearRatios.drivetrain + c_front_left.getPosition() * GearRatios.drivetrain)/2; //take avg for accuracy i guess
+        front_left.set(ControlMode.Position, distanceGoal * GearRatios.drivetrain);
         front_right.follow(front_left);
         back_left.follow(front_left);
         back_right.follow(front_left);

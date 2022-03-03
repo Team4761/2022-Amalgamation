@@ -31,8 +31,7 @@ public class findTarget extends CommandBase {
     @Override
     public void execute() {
         isTarget = tv.getBoolean(false);
-        RobotMap.m_leftMotors.set(0);
-        RobotMap.m_rightMotors.set(0);
+        RobotMap.m_drive.arcadeDrive(0.0,0.3);
     }
 
     @Override
