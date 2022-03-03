@@ -215,13 +215,13 @@ public class OI {
             case OneXbox:
             case XboxAndButtonBoard:
                 climberValue = driverController.getRawAxis(5); // up and down on second stick
-                shooterValue = driverController.getRawAxis(4); // right trigger
-                intakeValue = driverController.getRawAxis(3); // left trigger
+                shooterValue = driverController.getRawAxis(3); // right trigger
+                intakeValue = driverController.getRawAxis(2); // left trigger
                 break;
             case TwoXbox:
                 climberValue = secondaryController.getRawAxis(5); // up and down on second stick
-                shooterValue = secondaryController.getRawAxis(4); // right trigger
-                intakeValue = secondaryController.getRawAxis(3); // left trigger
+                shooterValue = secondaryController.getRawAxis(3); // right trigger
+                intakeValue = secondaryController.getRawAxis(2); // left trigger
                 break;
             case FlightStick:
                 // no nothing lol
