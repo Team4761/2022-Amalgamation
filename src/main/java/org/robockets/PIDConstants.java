@@ -8,6 +8,7 @@ public class PIDConstants {
 
     public static final double r_wheel_meters = 0.0508;
     public static final double width_meters = 0.63;
+    public static final double shooter_width_meters = 0.25;
 
     //max rpm
     public static final double MAX_NEO_RPM = 5676;

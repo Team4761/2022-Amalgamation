@@ -34,10 +34,6 @@ public class OI {
     //public static double sc_lefttrigger = secondaryController.getRawAxis(3);
     //public static double sc_righttrigger = secondaryController.getRawAxis(4);
 
-    /**
-     * I need SOMEONE TO fix this! Use the two arduinos that I already built!
-     */
-
     //The Manual Arduino
     public static Joystick manual;
     /*public static JoystickButton mb1 = new JoystickButton(manual, 1);
@@ -172,6 +168,7 @@ public class OI {
                 move_climber = dc_a;
                 //activate_fly_wheel_max_speed = dc_b;
                 activate_inner_wheel = dc_y;
+
                 break;
             case TwoXbox:
                 secondaryController = new Joystick(1);

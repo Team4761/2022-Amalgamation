@@ -71,9 +71,20 @@ public class ShooterSubsystem extends SubsystemBase {
 
     // Input is position changed over 100 milliseconds
     public void shootExact(double rpm) {
-        double encoder_value_change_over_100_millis = (rpm * PIDConstants.TICKS_PER_REV) / 600.0;
+        double encoder_value_change_over_100_millis = (rpm * PIDConstants.TICKS_PER_REV) / 600.0; // This 600 comes from turning 1 minute into 100 milliseconds
         RobotMap.ShooterLeft.set(ControlMode.Velocity,encoder_value_change_over_100_millis * GearRatios.shooter);
         RobotMap.ShooterRight.set(ControlMode.Velocity,-encoder_value_change_over_100_millis * GearRatios.shooter);
+    }
+
+    /**
+     * Get the shooter to fire an exact speed in meters per second
+     * Reminder that the talonFX's velocity mode works by delta-pos in encoder ticks / 100 millis
+     * @param mps meters per seond
+     */
+    public void shootExactMps(double mps) {
+        double encoder_value = (mps / PIDConstants.shooter_width_meters) * PIDConstants.TICKS_PER_REV / 10.0; // this 10 comes from turning 1 second into 100 millis
+        RobotMap.ShooterLeft.set(ControlMode.Velocity,encoder_value * GearRatios.shooter);
+        RobotMap.ShooterRight.set(ControlMode.Velocity,-encoder_value * GearRatios.shooter);
     }
 
     public void AdjustHoodExact(double degrees) {
