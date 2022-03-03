@@ -93,6 +93,7 @@ public class Robot extends TimedRobot
         mode.setDefaultOption("One Xbox Controller", OI.ControllerMode.OneXbox);
         mode.addOption("Two Xbox Controllers", OI.ControllerMode.TwoXbox);
         mode.addOption("Xbox and Button Board", OI.ControllerMode.XboxAndButtonBoard);
+        SmartDashboard.putData("Control Mode", mode);
 
         // Add field odometry and add xbox and button board graphic
         SmartDashboard.putData("Field",Varyings.m_field);

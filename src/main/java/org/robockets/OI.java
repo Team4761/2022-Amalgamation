@@ -27,10 +27,10 @@ public class OI {
     //public static double dc_righttrigger = driverController.getRawAxis(4);
 
     public static Joystick secondaryController;
-    public static JoystickButton sc_a = new JoystickButton(secondaryController, 1);
-    public static JoystickButton sc_b = new JoystickButton(secondaryController, 2);
-    public static JoystickButton sc_x = new JoystickButton(secondaryController, 3);
-    public static JoystickButton sc_y = new JoystickButton(secondaryController, 4);
+    public static JoystickButton sc_a;
+    public static JoystickButton sc_b;
+    public static JoystickButton sc_x;
+    public static JoystickButton sc_y;
     //public static double sc_lefttrigger = secondaryController.getRawAxis(3);
     //public static double sc_righttrigger = secondaryController.getRawAxis(4);
 
@@ -40,7 +40,7 @@ public class OI {
 
     //The Manual Arduino
     public static Joystick manual;
-    public static JoystickButton mb1 = new JoystickButton(manual, 1);
+    /*public static JoystickButton mb1 = new JoystickButton(manual, 1);
     public static JoystickButton mb2 = new JoystickButton(manual, 2);
     public static JoystickButton mb3 = new JoystickButton(manual, 3);
     public static JoystickButton mb4 = new JoystickButton(manual, 4);
@@ -71,11 +71,11 @@ public class OI {
     public static JoystickButton mb29 = new JoystickButton(manual, 29);
     public static JoystickButton mb30 = new JoystickButton(manual, 30);
     public static JoystickButton mb31 = new JoystickButton(manual, 31);
-    public static JoystickButton mb32 = new JoystickButton(manual, 32);
+    public static JoystickButton mb32 = new JoystickButton(manual, 32);*/
 
     //The Automatic Arduino
     public static Joystick auto;
-    public static JoystickButton ab1 = new JoystickButton(auto, 1);
+    /*public static JoystickButton ab1 = new JoystickButton(auto, 1);
     public static JoystickButton ab2 = new JoystickButton(auto, 2);
     public static JoystickButton ab3 = new JoystickButton(auto, 3);
     public static JoystickButton ab4 = new JoystickButton(auto, 4);
@@ -106,7 +106,7 @@ public class OI {
     public static JoystickButton ab29 = new JoystickButton(auto, 29);
     public static JoystickButton ab30 = new JoystickButton(auto, 30);
     public static JoystickButton ab31 = new JoystickButton(auto, 31);
-    public static JoystickButton ab32 = new JoystickButton(auto, 32);
+    public static JoystickButton ab32 = new JoystickButton(auto, 32);*/
 
     /**
      * Yes I KNOW this is a repeat, but
@@ -175,6 +175,10 @@ public class OI {
                 break;
             case TwoXbox:
                 secondaryController = new Joystick(1);
+                sc_a = new JoystickButton(secondaryController, 1);
+                sc_b = new JoystickButton(secondaryController, 2);
+                sc_x = new JoystickButton(secondaryController, 3);
+                sc_y = new JoystickButton(secondaryController, 4);
                 hood_raise = new JoystickButton(secondaryController, 5); //left trigger button
                 hood_lower = new JoystickButton(secondaryController, 6); //right trigger button
                 intake_pneumatic = sc_b;
@@ -214,11 +218,14 @@ public class OI {
             // Despite the button board being used, certain values just work better with the xbox controller
             case OneXbox:
             case XboxAndButtonBoard:
+                if(auto == null) auto = new Joystick(2);
+                if(manual == null) manual = new Joystick(1);
                 climberValue = driverController.getRawAxis(5); // up and down on second stick
                 shooterValue = driverController.getRawAxis(3); // right trigger
                 intakeValue = driverController.getRawAxis(2); // left trigger
                 break;
             case TwoXbox:
+                if(secondaryController == null) secondaryController = new Joystick(1);
                 climberValue = secondaryController.getRawAxis(5); // up and down on second stick
                 shooterValue = secondaryController.getRawAxis(3); // right trigger
                 intakeValue = secondaryController.getRawAxis(2); // left trigger
@@ -238,6 +245,7 @@ public class OI {
             destructButtonBoard();
 
             // Change which controller is being used
+            System.out.println("Changing Controller Setup...");
             changeDriveMode();
         }
         deltaSelected = selectedMode;
