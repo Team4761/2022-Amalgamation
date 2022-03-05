@@ -22,4 +22,7 @@ public class Varyings {
     public static double drivetrainMaxSpeed = 1.0;
     public static double drivetrainMaxRotationSpeed = 1.0;
     public static double hoodAdjusterMaxSpeed = 0.1;
+
+    public static double climberUpSpeed = 1.0;
+    public static double climberDownSpeed = 0.9;
 }

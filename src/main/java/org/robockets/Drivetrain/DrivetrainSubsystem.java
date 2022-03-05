@@ -74,7 +74,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
             //RobotMap.m_drive.tankDrive(-trans_left,trans_right);
         }
         if(driveType == ARCADE){
-            double rot = OI.driverController.getRawAxis(0);
+            // Evil but temporary
+            double rot = OI.selectedMode == OI.ControllerMode.TwoXbox ? OI.driverController.getRawAxis(4): OI.driverController.getRawAxis(0);
             double trans = OI.driverController.getRawAxis(1);
 
             RobotMap.m_drive.arcadeDrive(trans * Varyings.drivetrainMaxSpeed,-rot * Varyings.drivetrainMaxRotationSpeed);
