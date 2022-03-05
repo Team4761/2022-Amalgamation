@@ -1,18 +1,20 @@
 package org.robockets.Drivetrain;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import org.robockets.Drivetrain.DrivetrainSubsystem;
-import org.robockets.Robot;
 import org.robockets.RobotMap;
 
 
 public class EVILAutoCommand extends CommandBase {
     //private final DrivetrainSubsystem drivetrainSubsystem = DrivetrainSubsystem.getInstance();
 
+    // Because it's easier, we're going to run this command with a manual timer instead of frc's commands
+
+    private double start_time;
+    private boolean auto_complete = false;
     public EVILAutoCommand() {
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
-        addRequirements(Robot.m_drivetrain);
+        //addRequirements(Robot.m_drivetrain);
     }
 
     /**
@@ -20,15 +22,38 @@ public class EVILAutoCommand extends CommandBase {
      */
     @Override
     public void initialize() {
+        System.out.println("Running EVIL Auto command...");
+        start_time = System.currentTimeMillis();
     }
 
     /**
      * The main body of a command.  Called repeatedly while the command is scheduled.
      * (That is, it is called repeatedly until {@link #isFinished()}) returns true.)
      */
+
     @Override
     public void execute() {
-        RobotMap.m_drive.tankDrive(-0.5,-0.5);
+
+        // Me praying that this is THE answer
+        //double time_since_boot = Robot.commandScheduler.timeSinceScheduled(this);
+        // turning milliseconds into seconds
+        double time_since_boot = 0.001*(System.currentTimeMillis() - start_time);
+
+        // If we're past 10 seconds, Just stop the whole command
+        if(time_since_boot >= 10.0) {
+            auto_complete = true;
+            return;
+        }
+        if(time_since_boot < 2.0) {
+            RobotMap.m_drive.tankDrive(-0.5,-0.5);
+        }
+        if(time_since_boot >= 3.0) {
+            RobotMap.ShooterLeft.set(1.0);
+            RobotMap.ShooterRight.set(-1.0);
+            RobotMap.inside_wheel.set(1.0);
+            RobotMap.inside_wheel2.set(-1.0);
+
+        }
     }
 
     /**
@@ -48,7 +73,7 @@ public class EVILAutoCommand extends CommandBase {
     @Override
     public boolean isFinished() {
         // TODO: Make this return true when this Command no longer needs to run execute()
-        return false;
+        return auto_complete;
     }
 
     /**

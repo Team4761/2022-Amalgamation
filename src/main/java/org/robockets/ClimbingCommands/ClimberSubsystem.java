@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.robockets.OI;
 import org.robockets.RobotMap;
+import org.robockets.Varyings;
 
 import static org.robockets.OI.move_climber;
 
@@ -57,9 +58,10 @@ public class ClimberSubsystem extends SubsystemBase {
         DoubleSolenoid.Value v = stat ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;
         RobotMap.ClimberSolenoids.set(v);
 
-        double ClimberSpeed = OI.climberValue; // up down on right stick
-        RobotMap.leftArmExtendMotor.set(ClimberSpeed);
-        RobotMap.rightArmExtendMotor.set(-ClimberSpeed);
+        double ClimberSpeedLeft = (OI.climberValueLeft > 0.0) ? OI.climberValueLeft * Varyings.climberUpSpeed : OI.climberValueLeft * Varyings.climberDownSpeed; // up down on right stick
+        double ClimberSpeedRight = (OI.climberValueRight > 0.0) ? OI.climberValueRight * Varyings.climberUpSpeed : OI.climberValueRight * Varyings.climberDownSpeed; // up down on right stick
+        RobotMap.leftArmExtendMotor.set(ClimberSpeedLeft);
+        RobotMap.rightArmExtendMotor.set(-ClimberSpeedRight);
         //RobotMap.ArmExtendMotor.set(ClimberSpeed);
 
         last_cycle_button = move_climber.get();

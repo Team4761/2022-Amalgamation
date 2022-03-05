@@ -146,6 +146,10 @@ public class OI {
     public static JoystickButton activate_inner_wheel;
 
     public static double climberValue;
+
+    public static double climberValueLeft;
+    public static double climberValueRight;
+
     public static double intakeValue;
     public static double shooterValue;
 
@@ -208,6 +212,7 @@ public class OI {
 
     /**
      * These values are the ones that are updated every cycle
+     * TODO: Implement deadband system into Shuffleboard
      */
     private ControllerMode deltaSelected;
     public void periodic() {
@@ -217,15 +222,21 @@ public class OI {
             case XboxAndButtonBoard:
                 if(auto == null) auto = new Joystick(2);
                 if(manual == null) manual = new Joystick(1);
+
                 climberValue = driverController.getRawAxis(5); // up and down on second stick
+                climberValueLeft = climberValue;
+                climberValueRight = climberValue;
+
                 shooterValue = driverController.getRawAxis(3); // right trigger
                 intakeValue = driverController.getRawAxis(2); // left trigger
                 break;
             case TwoXbox:
                 if(secondaryController == null) secondaryController = new Joystick(1);
-                climberValue = secondaryController.getRawAxis(5); // up and down on second stick
+                // Dead band added because one of our controllers drive :(
+                climberValueLeft = (Math.abs(secondaryController.getRawAxis(1)) < 0.4) ? 0.0 : -secondaryController.getRawAxis(1); // up and down on second stick
+                climberValueRight = (Math.abs(secondaryController.getRawAxis(5)) < 0.4) ? 0.0 : -secondaryController.getRawAxis(5); // up and down on first stick
                 shooterValue = secondaryController.getRawAxis(3); // right trigger
-                intakeValue = secondaryController.getRawAxis(2); // left trigger
+                intakeValue = (Math.abs(secondaryController.getRawAxis(2)) < 0.25) ? 0.0 : secondaryController.getRawAxis(2); // left trigger
                 break;
             case FlightStick:
                 // no nothing lol

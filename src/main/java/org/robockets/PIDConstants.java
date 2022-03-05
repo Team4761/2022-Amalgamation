@@ -1,8 +1,5 @@
 package org.robockets;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.sensors.CANCoder;
-
 // me when #define doesn't exist in java :(
 public class PIDConstants {
 
