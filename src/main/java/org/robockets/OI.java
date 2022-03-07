@@ -6,11 +6,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class OI {
 
-    public static ControllerMode selectedMode = ControllerMode.OneXbox;
+    public static ControllerMode selectedMode = ControllerMode.TwoXboxClimberOneStick;
 
     public enum ControllerMode {
         OneXbox,
         TwoXbox,
+        TwoXboxClimberOneStick,
         XboxAndButtonBoard,
         FlightStick
     }
@@ -145,9 +146,20 @@ public class OI {
     public static JoystickButton activate_fly_wheel_max_speed; // this might also activate the wheel in the shaft
     public static JoystickButton activate_inner_wheel;
 
+    /**
+     * Analog values that are used throughout the robot
+     * All of these are interchangeable depending on what controller setup we decide to use
+     */
     public static double climberValue;
+
+    public static double climberValueLeft;
+    public static double climberValueRight;
+
     public static double intakeValue;
     public static double shooterValue;
+
+    public static double drivetrain_translation;
+    public static double drivetrain_rotation;
 
     public static JoystickButton auto1;
     public static JoystickButton auto2;
@@ -170,7 +182,7 @@ public class OI {
                 activate_inner_wheel = dc_y;
 
                 break;
-            case TwoXbox:
+            case TwoXbox: case TwoXboxClimberOneStick:
                 secondaryController = new Joystick(1);
                 sc_a = new JoystickButton(secondaryController, 1);
                 sc_b = new JoystickButton(secondaryController, 2);
@@ -208,6 +220,7 @@ public class OI {
 
     /**
      * These values are the ones that are updated every cycle
+     * TODO: Implement deadband system into Shuffleboard
      */
     private ControllerMode deltaSelected;
     public void periodic() {
@@ -217,15 +230,40 @@ public class OI {
             case XboxAndButtonBoard:
                 if(auto == null) auto = new Joystick(2);
                 if(manual == null) manual = new Joystick(1);
+
                 climberValue = driverController.getRawAxis(5); // up and down on second stick
+                climberValueLeft = climberValue;
+                climberValueRight = climberValue;
+
                 shooterValue = driverController.getRawAxis(3); // right trigger
                 intakeValue = driverController.getRawAxis(2); // left trigger
+
+                drivetrain_rotation = driverController.getRawAxis(0);
+                drivetrain_translation = driverController.getRawAxis(1);
                 break;
             case TwoXbox:
                 if(secondaryController == null) secondaryController = new Joystick(1);
-                climberValue = secondaryController.getRawAxis(5); // up and down on second stick
+                // Dead band added because one of our controllers drive :(
+                climberValueLeft = (Math.abs(secondaryController.getRawAxis(1)) < 0.4) ? 0.0 : -secondaryController.getRawAxis(1); // up and down on second stick
+                climberValueRight = (Math.abs(secondaryController.getRawAxis(5)) < 0.4) ? 0.0 : -secondaryController.getRawAxis(5); // up and down on first stick
                 shooterValue = secondaryController.getRawAxis(3); // right trigger
-                intakeValue = secondaryController.getRawAxis(2); // left trigger
+                intakeValue = (Math.abs(secondaryController.getRawAxis(2)) < 0.25) ? 0.0 : secondaryController.getRawAxis(2); // left trigger
+
+
+                drivetrain_rotation = driverController.getRawAxis(4);
+                drivetrain_translation = driverController.getRawAxis(1);
+                break;
+            case TwoXboxClimberOneStick:
+                // All this does is make sure that the climber is on one stick only
+                if(secondaryController == null) secondaryController = new Joystick(1);
+                // Dead band added because one of our controllers drive :(
+                climberValueLeft = (Math.abs(secondaryController.getRawAxis(5)) < 0.4) ? 0.0 : -secondaryController.getRawAxis(5); // up and down on second stick
+                climberValueRight = climberValueLeft;
+                shooterValue = secondaryController.getRawAxis(3); // right trigger
+                intakeValue = (Math.abs(secondaryController.getRawAxis(2)) < 0.25) ? 0.0 : secondaryController.getRawAxis(2); // left trigger
+
+                drivetrain_rotation = driverController.getRawAxis(4);
+                drivetrain_translation = driverController.getRawAxis(1);
                 break;
             case FlightStick:
                 // no nothing lol
@@ -242,7 +280,7 @@ public class OI {
             destructButtonBoard();
 
             // Change which controller is being used
-            System.out.println("Changing Controller Setup...");
+            System.out.println("Changing Controller Setup to " + selectedMode.name());
             changeDriveMode();
         }
         deltaSelected = selectedMode;

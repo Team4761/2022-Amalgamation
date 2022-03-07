@@ -5,7 +5,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import org.robockets.GearRatios;
+import org.robockets.AutonoumousResources.GearRatios;
 import org.robockets.OI;
 import org.robockets.RobotMap;
 import org.robockets.Varyings;
@@ -54,15 +54,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        Rotation2d angle = RobotMap.gyro.getRotation2d();
-        //double l_dist = RobotMap.front_left.getSelectedSensorPosition();
-        //double r_dist = RobotMap.front_right.getSelectedSensorPosition();
-        double l_dist = RobotMap.c_front_left.getPosition() * GearRatios.drivetrain;
-        double r_dist = RobotMap.c_front_right.getPosition() * GearRatios.drivetrain;
-        RobotMap.m_odometry.update(angle,l_dist,r_dist);
-        // update field
-        Varyings.m_field.setRobotPose(RobotMap.m_odometry.getPoseMeters());
-
+        odemetryUpdate();
         // I HATE Java!
         // I wanted to add a define preprocessor here so right_flight_stick not existing wouldn't through an error, but screw me!
 		
@@ -74,8 +66,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
             //RobotMap.m_drive.tankDrive(-trans_left,trans_right);
         }
         if(driveType == ARCADE){
-            double rot = OI.driverController.getRawAxis(0);
-            double trans = OI.driverController.getRawAxis(1);
+            // Evil but temporary
+            //double rot = (OI.selectedMode == OI.ControllerMode.TwoXbox || OI.selectedMode == OI.ControllerMode.TwoXboxClimberOneStick) ? OI.driverController.getRawAxis(4): OI.driverController.getRawAxis(0);
+            //double trans = OI.driverController.getRawAxis(1);
+
+            double rot = OI.drivetrain_rotation;
+            double trans = OI.drivetrain_translation;
 
             RobotMap.m_drive.arcadeDrive(trans * Varyings.drivetrainMaxSpeed,-rot * Varyings.drivetrainMaxRotationSpeed);
         }
@@ -116,6 +112,17 @@ public class DrivetrainSubsystem extends SubsystemBase {
         RobotMap.back_right.setVoltage(r);
 
         RobotMap.m_drive.feed();
+    }
+
+    public void odemetryUpdate() {
+        Rotation2d angle = RobotMap.gyro.getRotation2d();
+        //double l_dist = RobotMap.front_left.getSelectedSensorPosition();
+        //double r_dist = RobotMap.front_right.getSelectedSensorPosition();
+        double l_dist = RobotMap.c_front_left.getPosition() * GearRatios.drivetrain;
+        double r_dist = RobotMap.c_front_right.getPosition() * GearRatios.drivetrain;
+        RobotMap.m_odometry.update(angle,l_dist,r_dist);
+        // update field
+        Varyings.m_field.setRobotPose(RobotMap.m_odometry.getPoseMeters());
     }
 }
 

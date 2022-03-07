@@ -58,7 +58,7 @@ public class IntakeSubsystem extends SubsystemBase {
             stat = !stat;
 
         DoubleSolenoid.Value v = stat ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;
-        RobotMap.intakeSolenoid.set(v);
+        RobotMap.intakeSolenoid.set(v); // <-- Is THIS taking up too much time?
 
         //if a button is pressed, change stat
         //stat = OI.intake_pneumatic.get();
