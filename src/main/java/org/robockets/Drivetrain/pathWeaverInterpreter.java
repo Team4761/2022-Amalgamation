@@ -11,7 +11,7 @@ import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstrai
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
-import org.robockets.PIDConstants;
+import org.robockets.AutonoumousResources.PIDConstants;
 import org.robockets.Robot;
 import org.robockets.RobotMap;
 

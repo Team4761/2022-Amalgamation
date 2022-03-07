@@ -1,5 +1,7 @@
 package org.robockets;
 
+import org.robockets.AutonoumousResources.GearRatios;
+
 public class mathstuff {
     //ALL MEASUREMENTS IN METRIC (because math)
     public static final double robotWidth = 3;

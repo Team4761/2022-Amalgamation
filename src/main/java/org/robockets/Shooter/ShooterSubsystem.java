@@ -5,6 +5,8 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.robockets.*;
+import org.robockets.AutonoumousResources.GearRatios;
+import org.robockets.AutonoumousResources.PIDConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
 

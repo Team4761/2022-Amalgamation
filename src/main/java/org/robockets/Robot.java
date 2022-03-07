@@ -6,23 +6,20 @@
 package org.robockets;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import org.robockets.AutonoumousResources.AutonomousOptions;
 import org.robockets.ClimbingCommands.ClimberSubsystem;
 import org.robockets.Drivetrain.DrivetrainSubsystem;
-import org.robockets.Drivetrain.EVILAutoCommand;
+import org.robockets.AutonoumousResources.EVILAutoCommand;
 import org.robockets.Drivetrain.pathWeaverInterpreter;
 import org.robockets.Intake.IntakeSubsystem;
 import org.robockets.Shooter.ShooterSubsystem;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 
@@ -35,11 +32,11 @@ import java.io.IOException;
 public class Robot extends TimedRobot
 {
     private String autoSelected;
-    private final SendableChooser<String> chooser = new SendableChooser<>();
-    private final SendableChooser<OI.ControllerMode> mode = new SendableChooser<>();
+    public static final SendableChooser<String> auto_options_chooser = new SendableChooser<>();
+    public static final SendableChooser<OI.ControllerMode> mode = new SendableChooser<>();
 
     // Command Scheduler
-    private CommandScheduler commandScheduler = CommandScheduler.getInstance();
+    public static CommandScheduler commandScheduler = CommandScheduler.getInstance();
 
     // Subsystems
     public static final DrivetrainSubsystem m_drivetrain = DrivetrainSubsystem.getInstance();
@@ -61,17 +58,20 @@ public class Robot extends TimedRobot
         m_oi = new OI();
 
         // adds all the auto options to it
-        AutonomousOptions.addOptions(chooser);
-        SmartDashboard.putData("Auto choices", chooser);
+        AutonomousOptions.addOptions(auto_options_chooser);
+        SmartDashboard.putData("Auto choices", auto_options_chooser);
 
         // Reverse all the motors that are needed
         //RobotMap.leftArmExtendMotor.setInverted(true);
         RobotMap.m_rightMotors.setInverted(true);
+        RobotMap.robotShoot.setInverted(true);
 
         commandScheduler.registerSubsystem(m_intake);
         commandScheduler.registerSubsystem(m_drivetrain);
         commandScheduler.registerSubsystem(m_climber);
         commandScheduler.registerSubsystem(m_shooter);
+
+        commandScheduler.schedule(new updateModelsCommand());
 
         // le almighty
         applyToShuffleboard();
@@ -79,10 +79,10 @@ public class Robot extends TimedRobot
 
     /**
      * Now we will add any necessary additions to SmartDashboard
-     * For the most part, anything added here will be simple modifiable values such as:
+     * <p>For the most part, anything added here will be simple modifiable values such as:</p>
      * motor speeds, constants, button IDs, PID values,
-     * Camera Streams, raspberry PI auto code selectors, Stuff like that!
-     * Check Varyings.java for more
+     * Camera Streams, raspberry PI auto code selectors, stuff like that!
+     * <p>Check Varyings.java for more</p>
      */
     public void applyToShuffleboard() {
         SmartDashboard.putData("Drivetrain PID", Varyings.drivetrainpid);
@@ -92,19 +92,17 @@ public class Robot extends TimedRobot
         SmartDashboard.putNumber("Max Drivetrain Rotational Speed", Varyings.drivetrainMaxRotationSpeed);
         SmartDashboard.putNumber("Max Hood Adjuster Speed",Varyings.hoodAdjusterMaxSpeed);
 
-        mode.setDefaultOption("One Xbox Controller", OI.ControllerMode.OneXbox);
+        SmartDashboard.putNumber("Climber Speeds [Up]", Varyings.climberUpSpeed);
+        SmartDashboard.putNumber("Climber Speeds [Down]", Varyings.climberDownSpeed);
+
+        mode.addOption("One Xbox Controller", OI.ControllerMode.OneXbox);
         mode.addOption("Two Xbox Controllers", OI.ControllerMode.TwoXbox);
         mode.addOption("Xbox and Button Board", OI.ControllerMode.XboxAndButtonBoard);
+        mode.setDefaultOption("Two Xbox Controllers, 1 stick for Climbing",OI.ControllerMode.TwoXboxClimberOneStick);
         SmartDashboard.putData("Control Mode", mode);
 
         // Add field odometry and add xbox and button board graphic
         SmartDashboard.putData("Field",Varyings.m_field);
-        try {
-            BufferedImage img = ImageIO.read(new File(System.getProperty("user.dir") + "\\resources\\Xbox reference"));
-            SmartDashboard.putData("Xbox Graphic",(Sendable)img);
-        } catch(Exception e) {
-            DriverStation.reportError("Could not open Xbox graphic!",e.getStackTrace());
-        }
     }
     
     /**
@@ -116,7 +114,7 @@ public class Robot extends TimedRobot
      */
     @Override
     public void robotPeriodic() {
-        updateModels();
+        //updateModels();
         SmartDashboard.updateValues();
         m_oi.periodic();
 
@@ -162,6 +160,8 @@ public class Robot extends TimedRobot
         RobotMap.c_hood_adjust.setD(Varyings.hoodAdjusterpid.getD());
 
         // update misc values
+        Varyings.climberUpSpeed = SmartDashboard.getNumber("Climber Speeds [Up]",0.0);
+        Varyings.climberDownSpeed = SmartDashboard.getNumber("Climber Speeds [Down]",0.0);
         Varyings.drivetrainMaxRotationSpeed = SmartDashboard.getNumber("Max Drivetrain Rotational Speed",1.0);
         Varyings.drivetrainMaxSpeed = SmartDashboard.getNumber("Max Drivetrain Speed",1.0);
         Varyings.hoodAdjusterMaxSpeed = SmartDashboard.getNumber("Max Hood Adjuster Speed",0.1);
@@ -181,74 +181,79 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        autoSelected = chooser.getSelected();
+        autoSelected = auto_options_chooser.getSelected();
         // autoSelected = SmartDashboard.getString("Auto Selector", DEFAULT_AUTO);
         System.out.println("Auto selected: " + autoSelected);
+        //commandScheduler.cancelAll();
+        // commandScheduler.unregisterSubsystem();
+        //commandScheduler.run();
+
+        //Evil copied code
+        switch (autoSelected) {
+            case AutonomousOptions.DEBUG_AUTO:
+                try {
+                    pathWeaverInterpreter.loadTrajectory(AutonomousOptions.DEBUG_AUTO_PATH);
+                } catch (IOException e) {
+                    DriverStation.reportError("Unable to Load the debug trajectory", true);
+                    e.printStackTrace();
+                }
+                CommandBase theRunningCommand = pathWeaverInterpreter.autoPathWeaverCommand();
+                commandScheduler.schedule(theRunningCommand);
+                break;
+            case AutonomousOptions.DEFAULT_AUTO:
+                // code goes here
+                break;
+            case AutonomousOptions.EASY_POINTS_AUTO:
+                try {
+                    pathWeaverInterpreter.loadTrajectory(AutonomousOptions.EASY_POINTS_AUTO_PATH);
+                } catch (IOException e) {
+                    DriverStation.reportError("Unable to Load the debug trajectory", true);
+                    e.printStackTrace();
+                }
+                theRunningCommand = pathWeaverInterpreter.autoPathWeaverCommand();
+                commandScheduler.schedule(theRunningCommand);
+                break;
+            case AutonomousOptions.FIND_BALL_ON_GROUND:
+                // raspberry pi code goes here
+                break;
+            case AutonomousOptions.SHOOT_BALL:
+                // shooter code goes here
+                break;
+            case AutonomousOptions.EVIL_AUTO:
+                theRunningCommand = (new EVILAutoCommand().withTimeout(10));
+                commandScheduler.schedule(false, theRunningCommand); // maybe?
+                break;
+            default:
+                // Put default auto code here
+                break;
+        }
+        // This is for some reason returning a "loop overrun" exception?
     }
-    
-    
+
     /** This method is called periodically during autonomous. */
-    private String last_cycle_autoSelected;
-    private CommandBase theRunningCommand;
     @Override
     public void autonomousPeriodic()
     {
-        // Allows for swapping between autos
-        if(!last_cycle_autoSelected.equals(autoSelected)) {
-            // Top the old command
-            commandScheduler.cancel(theRunningCommand);
-            switch (autoSelected) {
-                case AutonomousOptions.DEBUG_AUTO:
-                    try {
-                        pathWeaverInterpreter.loadTrajectory(AutonomousOptions.DEBUG_AUTO_PATH);
-                    } catch (IOException e) {
-                        DriverStation.reportError("Unable to Load the debug trajectory", true);
-                        e.printStackTrace();
-                    }
-                    theRunningCommand = pathWeaverInterpreter.autoPathWeaverCommand();
-                    commandScheduler.schedule(theRunningCommand);
-                    break;
-                case AutonomousOptions.DEFAULT_AUTO:
-                    // code goes here
-                    break;
-                case AutonomousOptions.EASY_POINTS_AUTO:
-                    try {
-                        pathWeaverInterpreter.loadTrajectory(AutonomousOptions.EASY_POINTS_AUTO_PATH);
-                    } catch (IOException e) {
-                        DriverStation.reportError("Unable to Load the debug trajectory", true);
-                        e.printStackTrace();
-                    }
-                    theRunningCommand = pathWeaverInterpreter.autoPathWeaverCommand();
-                    commandScheduler.schedule(theRunningCommand);
-                    break;
-                case AutonomousOptions.FIND_BALL_ON_GROUND:
-                    // raspberry pi code goes here
-                    break;
-                case AutonomousOptions.SHOOT_BALL:
-                    // shooter code goes here
-                    break;
-                case AutonomousOptions.EVIL_AUTO:
-                    theRunningCommand = (new EVILAutoCommand().withTimeout(2));
-                    commandScheduler.schedule(theRunningCommand);
-                    break;
-                default:
-                    // Put default auto code here
-                    break;
-            }
-        }
-        last_cycle_autoSelected = autoSelected;
+        commandScheduler.run();
+        // Not sure what SHOULD be here...
     }
-    
-    
+
     /** This method is called once when teleop is enabled. */
     @Override
-    public void teleopInit() {}
-    
+    public void teleopInit() {
+        // Re-enabling all the subsystems after auto is complete.
+        // This is complete and utter garbage code, and I mean that
+        commandScheduler.registerSubsystem(m_intake);
+        commandScheduler.registerSubsystem(m_drivetrain);
+        commandScheduler.registerSubsystem(m_climber);
+        commandScheduler.registerSubsystem(m_shooter);
+    }
     
     /** This method is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
         // When it works :(
+        commandScheduler.cancelAll();
         commandScheduler.run();
     }
     
