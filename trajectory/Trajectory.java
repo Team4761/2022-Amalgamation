@@ -2,7 +2,7 @@ import java.lang.Math;
 class Trajectory
 {
     // All math is done using METERS
-    public static double velocity=0;
+    public static double velocity;
     public static double angle;
     
     final static double max_height = 8;
