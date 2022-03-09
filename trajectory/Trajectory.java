@@ -37,7 +37,7 @@ class Trajectory
             angle = Math.atan(2*a*xb+b); // In radians
         }
         double SOA = Math.sin(angle);
-        double velocity = Math.sqrt((19.6*8)/(SOA*SOA));
+        double velocity = Math.sqrt((19.6*high)/(SOA*SOA));
         
         this.velocity = velocity;
         this.angle = angle * 57.2958; // Conversion from radians to degrees
