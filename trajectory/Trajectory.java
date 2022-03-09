@@ -6,11 +6,11 @@ class Trajectory
     public static double angle;
     
     final static double max_height = 8;
-    final static double xg = 0;
-    final static double yg = 2.64;
-    final static double xc = 0.46;
-    final static double yc = 2.77;
-    final static double yb = 0;
+    final static double xg = 0;             // x position of the goal
+    final static double yg = 2.64;          // y position of the goal
+    final static double xc = 0.46;          // x position of a point close to the goal
+    final static double yc = 2.77;          // y position of a point close to the goal
+    final static double yb = 0;             // robot y position is always 0
     
     // Math for finding this can be found here: https://www.desmos.com/calculator/hjpblf25yh
     public void calculateTrajectory(double xb){
