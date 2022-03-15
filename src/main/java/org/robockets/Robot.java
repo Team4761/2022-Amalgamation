@@ -192,6 +192,7 @@ public class Robot extends TimedRobot
         switch (autoSelected) {
             case AutonomousOptions.DEBUG_AUTO:
                 try {
+                    System.out.println("Test!");
                     pathWeaverInterpreter.loadTrajectory(AutonomousOptions.DEBUG_AUTO_PATH);
                 } catch (IOException e) {
                     DriverStation.reportError("Unable to Load the debug trajectory", true);
@@ -201,7 +202,15 @@ public class Robot extends TimedRobot
                 commandScheduler.schedule(theRunningCommand);
                 break;
             case AutonomousOptions.DEFAULT_AUTO:
-                // code goes here
+                try {
+                    System.out.println("Test!");
+                    pathWeaverInterpreter.loadTrajectory(AutonomousOptions.DEFAULT_AUTO_PATH);
+                } catch (IOException e) {
+                    DriverStation.reportError("Unable to Load the debug trajectory", true);
+                    e.printStackTrace();
+                }
+                theRunningCommand = pathWeaverInterpreter.autoPathWeaverCommand();
+                commandScheduler.schedule(theRunningCommand);
                 break;
             case AutonomousOptions.EASY_POINTS_AUTO:
                 try {
