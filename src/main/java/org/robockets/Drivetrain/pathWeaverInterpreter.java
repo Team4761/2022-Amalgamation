@@ -47,29 +47,20 @@ public class pathWeaverInterpreter {
 
     // What a mess
     // TODO: What does any of this actually mean?
-    public static RamseteCommand ramseteCommand =
-            new RamseteCommand(
-                    usableTrajectory,
-                    Robot.m_drivetrain::getPose,
-                    new RamseteController(PIDConstants.kRamseteB,PIDConstants.kRamseteZeta),
-                    motorfeed,
-                    RobotMap.kDriveKinematics,
-                    Robot.m_drivetrain::getWheelSpeeds,
-                    new PIDController(PIDConstants.kPDriveVel,0,0),
-                    new PIDController(PIDConstants.kPDriveVel, 0,0),
-                    Robot.m_drivetrain::tankDriveVolts,
-                    Robot.m_drivetrain
-            );
+    public static RamseteCommand ramseteCommand;
 
     // The path would be the path on the roborio.
     // Use FileZilla to upload what you need!
 
     public static void loadTrajectory(String path) throws IOException {
+        System.out.println("Path is: " + path);
+        //Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(path);
         Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(path);
         usableTrajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
     }
 
     public static CommandBase autoPathWeaverCommand() {
+        System.out.println(usableTrajectory);
         updateCommand();
         Pose2d start = usableTrajectory.getInitialPose();
         Robot.m_drivetrain.resetOdometry(start);

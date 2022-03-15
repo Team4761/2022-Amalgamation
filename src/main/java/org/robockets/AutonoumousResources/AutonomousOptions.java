@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class AutonomousOptions {
 
     //Every time you rewrite code, you kill a kitten :(
-    private static final String SYSTEM_DIR = System.getProperty("user.dir");
-    private static final String TRAJECTORY_DIR = SYSTEM_DIR + "\\trajectory";
+    private static final String SYSTEM_DIR = "";
+    private static final String TRAJECTORY_DIR = SYSTEM_DIR + "trajectory/";
 
     public static final String DEFAULT_AUTO = "Default";
     public static final String DEBUG_AUTO = "First Debug Auto";
@@ -16,10 +16,10 @@ public class AutonomousOptions {
     public static final String FIND_BALL_ON_GROUND = "Goto Ball";
     public static final String EVIL_AUTO = "Move the Robot backwards for 2 seconds";
 
-    public static final String DEFAULT_AUTO_PATH = TRAJECTORY_DIR + "\\easy path.wpilib.json";
-    public static final String DEBUG_AUTO_PATH = "\\debug path.wpilib.json";
-    public static final String EASY_POINTS_AUTO_PATH = "\\easy dubs.wpilib.json";
-    public static final String FIVE_BALL_PATH = TRAJECTORY_DIR + "\\Main Path.wpilib.json";
+    public static final String DEFAULT_AUTO_PATH = TRAJECTORY_DIR + "easy path.wpilib.json";
+    public static final String DEBUG_AUTO_PATH = TRAJECTORY_DIR + "Debug Path.wpilib.json";
+    public static final String EASY_POINTS_AUTO_PATH = TRAJECTORY_DIR + "easy dubs.wpilib.json";
+    public static final String FIVE_BALL_PATH = TRAJECTORY_DIR + "Main Path.wpilib.json";
     public static final String SHOOT_BALL_PATH = "";
     public static final String FIND_BALL_ON_GROUND_PATH = "";
     public static final String EVIL_AUTO_PATH = "No path dummy!";

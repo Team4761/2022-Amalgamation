@@ -54,7 +54,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        odemetryUpdate();
+        odometryUpdate();
         // I HATE Java!
         // I wanted to add a define preprocessor here so right_flight_stick not existing wouldn't through an error, but screw me!
 		
@@ -114,7 +114,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         RobotMap.m_drive.feed();
     }
 
-    public void odemetryUpdate() {
+    public void odometryUpdate() {
         Rotation2d angle = RobotMap.gyro.getRotation2d();
         //double l_dist = RobotMap.front_left.getSelectedSensorPosition();
         //double r_dist = RobotMap.front_right.getSelectedSensorPosition();
