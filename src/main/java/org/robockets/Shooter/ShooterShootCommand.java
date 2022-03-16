@@ -29,6 +29,20 @@ public class ShooterShootCommand extends CommandBase {
     public void execute() {
         //If all shoots arent making mess with this variable accordingly
         double frictionMakeup = 1.0;
+        //Aim bot v2
+        double h;//idk
+        double d = mathstuff.getDistanceTower(ty.getDouble(0.0));
+        
+        double angle = Math.arctan(2h/d);
+        //for angle in degrees
+        angle = (angle/(Math.PI * 2)) * 360;
+        
+        double vo = Math.Sqrt((9.81*4(h*h)*(d*d))/2h);
+        vo = (30*vo)/((Math.PI)*(PIDConstants.r_wheel_meters/39.37));
+        
+        //map
+        //Robot.m_shooter.shootExact(vo * frictionMakeup);
+        
         //Aim Assist Hacks
         double y = 2.44;
         //Owen put distance from limelight
