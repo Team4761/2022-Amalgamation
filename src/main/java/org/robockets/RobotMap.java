@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
@@ -44,7 +45,11 @@ public class RobotMap {
     public static DifferentialDriveOdometry m_odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
 
     // Intake
-    public static CANSparkMax back_intake = new CANSparkMax(9, CANSparkMaxLowLevel.MotorType.kBrushless);
+    public static CANSparkMax back_intake_upper = new CANSparkMax(9, CANSparkMaxLowLevel.MotorType.kBrushless);
+    public static CANSparkMax back_intake_lower = new CANSparkMax(47, CANSparkMaxLowLevel.MotorType.kBrushed);
+
+    public static MotorControllerGroup back_intake = new MotorControllerGroup(back_intake_upper,back_intake_lower);
+
     //public static CANSparkMax front_intake = new CANSparkMax(10, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     // 2 is push out, 3 is in
@@ -73,9 +78,9 @@ public class RobotMap {
 	
 	public static CANSparkMax hood_adjust = new CANSparkMax(11, CANSparkMaxLowLevel.MotorType.kBrushless);
 	public static SparkMaxPIDController c_hood_adjust = hood_adjust.getPIDController();
+    public static RelativeEncoder e_hood_adjust = hood_adjust.getEncoder();
 	
 	public static CANSparkMax inside_wheel = new CANSparkMax(12, CANSparkMaxLowLevel.MotorType.kBrushless); // This can just run on it's own to be honest
     public static CANSparkMax inside_wheel2 = new CANSparkMax(10, CANSparkMaxLowLevel.MotorType.kBrushless);
-
 
 }

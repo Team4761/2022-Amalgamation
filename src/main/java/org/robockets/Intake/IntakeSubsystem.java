@@ -43,7 +43,7 @@ public class IntakeSubsystem extends SubsystemBase {
         //       such as SpeedControllers, Encoders, DigitalInputs, etc.
     }
 
-    private boolean stat = false;
+    private boolean stat = true;
     private boolean last_cycle_button = false;
     @Override
     public void periodic() {

@@ -5,6 +5,10 @@
 
 package org.robockets;
 
+import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.jni.CANSparkMaxJNI;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -13,6 +17,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.robockets.AutonoumousResources.AutonomousOptions;
+import org.robockets.AutonoumousResources.FindBallFromStartCommand;
+import org.robockets.AutonoumousResources.MoveBackAndFireCommandGroup;
 import org.robockets.ClimbingCommands.ClimberSubsystem;
 import org.robockets.Drivetrain.DrivetrainSubsystem;
 import org.robockets.AutonoumousResources.EVILAutoCommand;
@@ -31,6 +37,9 @@ import java.io.IOException;
  */
 public class Robot extends TimedRobot
 {
+    public static final boolean RESET_EVERY_TIME = false;
+    private double v_startTime = System.currentTimeMillis();
+    private double v_time;
     private String autoSelected;
     public static final SendableChooser<String> auto_options_chooser = new SendableChooser<>();
     public static final SendableChooser<OI.ControllerMode> mode = new SendableChooser<>();
@@ -54,12 +63,18 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit()
     {
+        CameraServer.startAutomaticCapture();
         //Initialize the buttons for the first boot up
         m_oi = new OI();
 
         // adds all the auto options to it
         AutonomousOptions.addOptions(auto_options_chooser);
         SmartDashboard.putData("Auto choices", auto_options_chooser);
+
+        // Evil!
+        if(auto_options_chooser.getSelected() == null) {
+            auto_options_chooser.setDefaultOption(AutonomousOptions.EVIL_AUTO,AutonomousOptions.EVIL_AUTO);
+        }
 
         // Reverse all the motors that are needed
         //RobotMap.leftArmExtendMotor.setInverted(true);
@@ -85,6 +100,8 @@ public class Robot extends TimedRobot
      * <p>Check Varyings.java for more</p>
      */
     public void applyToShuffleboard() {
+        SmartDashboard.putNumber("Shooter RPM", 600.0 * RobotMap.ShooterLeft.getSelectedSensorVelocity() / 4096.0);
+
         SmartDashboard.putData("Drivetrain PID", Varyings.drivetrainpid);
         SmartDashboard.putData("Shooter PID", Varyings.shooterpid);
         SmartDashboard.putData("Hood Adjuster PID", Varyings.hoodAdjusterpid);
@@ -114,7 +131,16 @@ public class Robot extends TimedRobot
      */
     @Override
     public void robotPeriodic() {
-        //updateModels();
+        v_time = System.currentTimeMillis() - v_startTime;
+
+        // Update all of it every 5 seconds
+        if(v_time % 5000 == 0) {
+            System.out.println("Updating Variables modified form SmartDashboard...");
+            updateModels();
+        }
+        // Except for Shooter RPM
+        SmartDashboard.putNumber("Shooter RPM", 600.0 * RobotMap.ShooterLeft.getSelectedSensorVelocity() / 4096.0);
+        SmartDashboard.putString("Auto Status:", Varyings.autoStatus);
         SmartDashboard.updateValues();
         m_oi.periodic();
 
@@ -188,10 +214,16 @@ public class Robot extends TimedRobot
         // commandScheduler.unregisterSubsystem();
         //commandScheduler.run();
 
+        if(autoSelected == null) {
+            autoSelected = AutonomousOptions.EVIL_AUTO;
+            System.out.println("Orange hat man is also confused!");
+        }
+
         //Evil copied code
         switch (autoSelected) {
             case AutonomousOptions.DEBUG_AUTO:
                 try {
+                    System.out.println("Test!");
                     pathWeaverInterpreter.loadTrajectory(AutonomousOptions.DEBUG_AUTO_PATH);
                 } catch (IOException e) {
                     DriverStation.reportError("Unable to Load the debug trajectory", true);
@@ -201,11 +233,8 @@ public class Robot extends TimedRobot
                 commandScheduler.schedule(theRunningCommand);
                 break;
             case AutonomousOptions.DEFAULT_AUTO:
-                // code goes here
-                break;
-            case AutonomousOptions.EASY_POINTS_AUTO:
                 try {
-                    pathWeaverInterpreter.loadTrajectory(AutonomousOptions.EASY_POINTS_AUTO_PATH);
+                    pathWeaverInterpreter.loadTrajectory(AutonomousOptions.DEFAULT_AUTO_PATH);
                 } catch (IOException e) {
                     DriverStation.reportError("Unable to Load the debug trajectory", true);
                     e.printStackTrace();
@@ -213,15 +242,29 @@ public class Robot extends TimedRobot
                 theRunningCommand = pathWeaverInterpreter.autoPathWeaverCommand();
                 commandScheduler.schedule(theRunningCommand);
                 break;
+            case AutonomousOptions.MOVE_BACK_AND_FIRE:
+                // mfw
+
+                commandScheduler.schedule(new MoveBackAndFireCommandGroup().withTimeout(15));
+                break;
             case AutonomousOptions.FIND_BALL_ON_GROUND:
                 // raspberry pi code goes here
                 break;
             case AutonomousOptions.SHOOT_BALL:
                 // shooter code goes here
                 break;
+            /**
+             * This Case is the MAIN CASE that Will run during Auto
+             * It will simple move back, and then align itself
+             */
             case AutonomousOptions.EVIL_AUTO:
                 theRunningCommand = (new EVILAutoCommand().withTimeout(10));
                 commandScheduler.schedule(false, theRunningCommand); // maybe?
+                break;
+            case AutonomousOptions.LIMELIGHT_AUTO:
+                //theRunningCommand = new AlignAndShootCommandGroup();
+                //theRunningCommand = new FindTargetAndShootOneBallCommand().withTimeout(14);
+                //commandScheduler.schedule(false,theRunningCommand);
                 break;
             default:
                 // Put default auto code here
@@ -270,10 +313,12 @@ public class Robot extends TimedRobot
     
     /** This method is called once when test mode is enabled. */
     @Override
-    public void testInit() {}
+    public void testInit() {
+    }
     
     
     /** This method is called periodically during test mode. */
     @Override
-    public void testPeriodic() {}
+    public void testPeriodic() {
+    }
 }

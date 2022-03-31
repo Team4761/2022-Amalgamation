@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import org.robockets.Drivetrain.DrivetrainSubsystem;
 import org.robockets.AutonoumousResources.GearRatios;
 import org.robockets.RobotMap;
-import org.robockets.mathstuff;
+import org.robockets.AutonoumousResources.mathstuff;
 
 import static org.robockets.RobotMap.*;
-import static org.robockets.mathstuff.metersToPosition;
-import static org.robockets.mathstuff.shootingDistance;
+import static org.robockets.AutonoumousResources.mathstuff.metersToPosition;
+import static org.robockets.AutonoumousResources.mathstuff.shootingDistance;
 
 
 public class adjustToDistance extends CommandBase {

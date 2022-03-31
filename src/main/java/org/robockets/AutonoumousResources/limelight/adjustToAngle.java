@@ -15,6 +15,8 @@ public class adjustToAngle extends CommandBase {
     public NetworkTableEntry tx = table.getEntry("tx");
     public static double xAngle;
 
+    int THRES = 5;
+
     public adjustToAngle() {
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
@@ -32,14 +34,14 @@ public class adjustToAngle extends CommandBase {
     // This is literately just bang-bang control.
     @Override
     public void execute() {
-
+        double speed = 0.01;
         xAngle = tx.getDouble(0.0);
 
-        if (xAngle > 1) {
-            RobotMap.m_drive.tankDrive(0.2, -0.2);
+        if (xAngle > THRES) {
+            RobotMap.m_drive.tankDrive(speed, -speed);
 
-        } else if (xAngle < -1) {
-            RobotMap.m_drive.tankDrive(-0.2, 0.2);
+        } else if (xAngle < -THRES) {
+            RobotMap.m_drive.tankDrive(-speed, speed);
         }
         //TODO make sure robot actaully goes in right direction mess with the - signs.
         SmartDashboard.putNumber("tx", tx.getDouble(0.0));
@@ -49,7 +51,7 @@ public class adjustToAngle extends CommandBase {
     @Override
     public boolean isFinished() {
 
-        if (xAngle > -1 && xAngle < 1) {
+        if (xAngle > -THRES && xAngle < THRES) {
             return true;
         } else {
             return false;

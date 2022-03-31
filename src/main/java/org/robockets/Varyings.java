@@ -19,10 +19,13 @@ public class Varyings {
     public static Field2d m_field = new Field2d();
 
     public static double flywheelMaxSpeed = 1.0;
-    public static double drivetrainMaxSpeed = 1.0;
-    public static double drivetrainMaxRotationSpeed = 0.5;
+    public static double drivetrainMaxSpeed = 0.75;
+    public static double drivetrainMaxRotationSpeed = 0.65;
     public static double hoodAdjusterMaxSpeed = 0.1;
 
-    public static double climberUpSpeed = 1.0;
-    public static double climberDownSpeed = 0.9;
+    //TODO: Condition Brody into not realizing that these values are going up every round
+    public static double climberUpSpeed = 0.6;
+    public static double climberDownSpeed = 0.4;
+
+    public static String autoStatus = "Not running";
 }

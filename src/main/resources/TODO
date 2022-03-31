@@ -1,0 +1,67 @@
+NOT PROGRAMMING RELATED:
+    -Build some sort of field to test out our robot.
+    -Just having teammates hold pipes and calling it a day isn't the best idea when we want accuracy!
+    -Add reflective tape on that hoola-hoop thingy to mimic it out on the field
+
+MISC:
+    -CAMERAS GALORE!
+        -Limelight on hood shooter
+        -Camera on intake
+        -Camera in front
+        -Camera for climbing
+    [Cameras are ran through the raspberry PI using the built in multiserver camera!]
+
+RASPBERRY PI:
+    -Camera Server running 4 cameras
+    -SOMEHOW: [Raspberry PI also runs another python script in another thread]
+    [BIG script that's loaded to listen to messages, and then runs the associated auto code]
+        -Is it possible to run two scripts at once with WPILIBPI?
+        -Is it even that necessary?
+        -Probably not, given that the script runs the WHOLE time
+        [All written in python, that's the programming language that Ian and Joe are comfortable with]
+
+    -NetworkTable with motor encoder data, specifically position and velocity
+    [Separate network table]
+    [Data sent as array of doubles] <-- Add python code that mentions which array location is which piece of data
+        -Motors:
+            -drivetrain motors [0,1,2,3,4,5,6,7] front left, back left, front right, back right
+            -Intake motor [8,9] Main motor
+            -Shooter motor [10,11,12,13] left, right
+
+AUTO:
+    REMINDER: ALL VISION CODE IS DONE ON THE RASPBERRY PI!
+    REMINDER: All autonomous initialization should happen inside autonomousinit()'s' hell scape of a switch statement!
+
+    -Configure Limelight Network so the roborio receives something! <-- Important!
+
+    -Implement the ability to shoot balls while running a pathweaver-generated path <-- Not top priority, not really needed either
+        HOWTO:
+            -Brute force getting segments? <-- Pathweaver has code for this
+            -Load another JSON file for other robot actions.
+
+    -Calculate where it would need to shoot from given the speed of the robot and the location of the limelight!
+        -This should be some fun calculus
+
+    -Configure 4 Ball auto to do something!
+        THINGS TO THINK ABOUT:
+            -Instead of using pathweaver, use your very own bezier curve script that updates based on the location of a ball.
+                -This way if anything is offset we'll still be able to detect our ball, and go right too it
+                -Just be sure that intake knows that they're doing, and that they can grab a ball from ANY
+                [This is all ran on the raspberry PI. The motor setpoints are what's sent over via network table]
+            - The code would look like this:
+                -Fire Ball in Robot
+                -Look for ball with cameras
+                -Go to ball
+                -Pick Up Ball (Just assume that intake knows what they're doing)
+                -Calculate speed based on limelight distance (Owen did this already)
+                -Fire Ball in robot
+                -Wait for ball to appear on shooter Camera [OR] wait for shooter motors to show an efficiency discrepancy.
+                    -If the shooter motors need to pull more weight, it means that the ball is currently being shot
+                -Goto Next ball
+                [ We sent a message to the raspberry PI asking to run 4 ball auto. ]
+
+    -DETECTING BALLS
+        -Joe and Ian, I NEED you two to test eventually!
+        -Get the ball's X & Y on the camera screen, and it's size. Using this we can figure out where the ball is relative to the robot by reversing the frustrum matrix.
+        -Don't know what that is? Do some research in how video games convert from a 3D space to a 2D screen
+        -[All done on the raspberry PI]
