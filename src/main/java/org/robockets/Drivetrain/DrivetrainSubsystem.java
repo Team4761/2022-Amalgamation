@@ -1,12 +1,16 @@
 package org.robockets.Drivetrain;
 
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.robockets.AutonoumousResources.GearRatios;
 import org.robockets.OI;
+import org.robockets.Robot;
 import org.robockets.RobotMap;
 import org.robockets.Varyings;
 //import edu.wpi.first.wpilibj2.examples.ramsetecommand.Constants.DriveConstants; //<-- I need this!
@@ -50,11 +54,36 @@ public class DrivetrainSubsystem extends SubsystemBase {
         //       in the constructor or in the robot coordination class, such as RobotContainer.
         //       Also, you can call addChild(name, sendableChild) to associate sendables with the subsystem
         //       such as SpeedControllers, Encoders, DigitalInputs, etc.
+
+        if(Robot.RESET_EVERY_TIME) {
+            RobotMap.front_left.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+            RobotMap.back_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+            RobotMap.back_left.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+            RobotMap.front_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+
+            RobotMap.front_right.setIntegralAccumulator(0.0);
+            RobotMap.back_right.setIntegralAccumulator(0.0);
+            RobotMap.front_left.setIntegralAccumulator(0.0);
+            RobotMap.back_left.setIntegralAccumulator(0.0);
+
+            double ramp_factor = 0.75;
+            RobotMap.front_left.configOpenloopRamp(ramp_factor);
+            RobotMap.back_left.configOpenloopRamp(ramp_factor);
+            RobotMap.front_right.configOpenloopRamp(ramp_factor);
+            RobotMap.back_right.configOpenloopRamp(ramp_factor);
+
+            NeutralMode mode = NeutralMode.Brake;
+            RobotMap.front_left.setNeutralMode(mode);
+            RobotMap.back_left.setNeutralMode(mode);
+            RobotMap.front_right.setNeutralMode(mode);
+            RobotMap.back_right.setNeutralMode(mode);
+        }
+
     }
 
     @Override
     public void periodic() {
-        odemetryUpdate();
+        odometryUpdate();
         // I HATE Java!
         // I wanted to add a define preprocessor here so right_flight_stick not existing wouldn't through an error, but screw me!
 		
@@ -114,7 +143,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         RobotMap.m_drive.feed();
     }
 
-    public void odemetryUpdate() {
+    public void odometryUpdate() {
         Rotation2d angle = RobotMap.gyro.getRotation2d();
         //double l_dist = RobotMap.front_left.getSelectedSensorPosition();
         //double r_dist = RobotMap.front_right.getSelectedSensorPosition();

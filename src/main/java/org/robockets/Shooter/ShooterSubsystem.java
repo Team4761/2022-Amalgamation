@@ -47,6 +47,7 @@ public class ShooterSubsystem extends SubsystemBase {
         //       in the constructor or in the robot coordination class, such as RobotContainer.
         //       Also, you can call addChild(name, sendableChild) to associate sendables with the subsystem
         //       such as SpeedControllers, Encoders, DigitalInputs, etc.
+
     }
 
     @Override
@@ -54,34 +55,40 @@ public class ShooterSubsystem extends SubsystemBase {
         // set motor speed
         //double speed = OI.activate_fly_wheel_max_speed.get() ? Varyings.flywheelMaxSpeed : 0.0;
         double speed = OI.shooterValue * Varyings.flywheelMaxSpeed; // This SHOULD be the left trigger
-        if(!DriverStation.isAutonomous()) {
+        /*if(!DriverStation.isAutonomous()) {
             RobotMap.ShooterLeft.set(speed);
             RobotMap.ShooterRight.set(-speed);
-        }
+        }*/
+
+        RobotMap.ShooterLeft.set(speed);
+        RobotMap.ShooterRight.set(-speed);
         //RobotMap.robotShoot.set(speed); // This way if another command is running the shooter, we don't brute force set it to 0
 
-        double insidewheelspeed = OI.activate_inner_wheel.get() ? 0.5 : 0.0;
+        double insidewheelspeed = OI.activate_inner_wheel.get() ? 0.4 : 0.0;
         RobotMap.inside_wheel.set(insidewheelspeed);
 
         // adjust shooter
+        double angle_speed = 0.1;
+        double encoder_value_position;
         double hoodShooterSpeed = OI.hood_raise.get() ? 1.0 : (OI.hood_lower.get() ? -1.0 : 0.0);
         hoodShooterSpeed *= Varyings.hoodAdjusterMaxSpeed;
         RobotMap.hood_adjust.set(hoodShooterSpeed);
-
-
+        //RobotMap.c_hood_adjust.setReference(ControlMode.Position, );
     }
 
     // Output is position in encoder units changed over 100 milliseconds
     public void shootExact(double rpm) {
-        double encoder_value_change_over_100_millis = (rpm * PIDConstants.TICKS_PER_REV) / 600.0; // This 600 comes from turning 1 minute into 100 milliseconds
+        double encoder_value_change_over_100_millis = (rpm * PIDConstants.TICKS_PER_REV);
+        encoder_value_change_over_100_millis /= 600.0; // This 600 comes from turning 1 minute into 100 milliseconds
+
         RobotMap.ShooterLeft.set(ControlMode.Velocity,encoder_value_change_over_100_millis * GearRatios.shooter);
         RobotMap.ShooterRight.set(ControlMode.Velocity,-encoder_value_change_over_100_millis * GearRatios.shooter);
     }
 
     /**
      * Get the shooter to fire an exact speed in meters per second
-     * Reminder that the talonFX's velocity mode works by delta-pos in encoder ticks / 100 millis
-     * @param mps meters per seond
+     * Reminder that the talonFX's velocity mode works in (distance covered in encoder ticks) / (100 millis)
+     * @param mps meters per second
      */
     public void shootExactMps(double mps) {
         double encoder_value = (mps / PIDConstants.shooter_width_meters) * 2.0 * Math.PI * PIDConstants.TICKS_PER_REV / 10.0; // this 10 comes from turning 1 second into 100 millis
